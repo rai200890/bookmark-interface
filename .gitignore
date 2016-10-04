@@ -13,7 +13,8 @@ lib-cov
 
 # Coverage directory used by tools like istanbul
 coverage
-
+#node modules
+node_modules
 # nyc test coverage
 .nyc_output
 
