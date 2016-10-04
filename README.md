@@ -1,5 +1,7 @@
 # bookmark-interface
 [![Build Status](https://travis-ci.org/rai200890/bookmark-interface.svg?branch=master)](https://travis-ci.org/rai200890/bookmark-interface)
+[![Code Climate](https://codeclimate.com/github/rai200890/bookmark-interface/badges/gpa.svg)](https://codeclimate.com/github/rai200890/bookmark-interface)
+
 
 Bookmark App using AngularJS.
 
