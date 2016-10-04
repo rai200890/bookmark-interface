@@ -1,0 +1,46 @@
+{
+  "name": "bookmark-interface",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start",
+    "start": "node node_modules/.bin/webpack-dev-server --content-base app --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rai200890/bookmark-interface.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rai200890/bookmark-interface/issues"
+  },
+  "homepage": "https://github.com/rai200890/bookmark-interface#readme",
+  "devDependencies": {
+    "angular-mocks": "^1.5.8",
+    "css-loader": "^0.25.0",
+    "es6-shim": "^0.35.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "karma-requirejs": "^1.1.0",
+    "karma-webpack": "^1.8.0",
+    "raw-loader": "^0.5.1",
+    "requirejs": "^2.1.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
+  },
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1",
+    "karma-es6-shim": "^1.0.0"
+  }
+}
