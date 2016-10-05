@@ -1,4 +1,5 @@
-module.exports = ['$stateProvider', '$locationProvider', '$urlRouterProvider', function($stateProvider, $locationProvider, $urlRouterProvider) {
+module.exports = ['$stateProvider', '$locationProvider', '$urlRouterProvider', 'localStorageServiceProvider',
+function($stateProvider, $locationProvider, $urlRouterProvider, localStorageServiceProvider) {
 
   $locationProvider.html5Mode({
     enabled: true,
@@ -18,8 +19,10 @@ module.exports = ['$stateProvider', '$locationProvider', '$urlRouterProvider', f
     controller: 'SignUpController',
     controllerAs: 'ctrl'
   });
-;
+
+  localStorageServiceProvider
+    .setPrefix('bookmarkApp')
+    .setStorageType('sessionStorage')
 
   $urlRouterProvider.when('/', '/login');
-}
-]
+}]

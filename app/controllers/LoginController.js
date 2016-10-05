@@ -1,18 +1,16 @@
-module.exports = [function LoginController() {
+module.exports = ['Auth', function LoginController(Auth) {
   var ctrl = this;
 
   ctrl.credentials = {};
   ctrl.saveCredentials = true;
 
-  ctrl.clear = function(){
-    ctrl.credentials = {};
-  };
-
   ctrl.login = function(){
-    console.log(ctrl.credentials);
+    Auth.login(ctrl.credentials).success(function(response){
+      console.log(response);
 
-    console.log(ctrl.saveCredentials);
-
+    }).error(function(response){
+      console.log('deu ruim');
+    });
   };
 
 }]
