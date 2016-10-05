@@ -8,7 +8,7 @@ var APP = __dirname + '/app';
 module.exports = {
   context: APP,
   entry: {
-    app: ['webpack/hot/dev-server', './index.js','./index.css']
+    app: ['webpack/hot/dev-server', './app.js','./app.css']
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -34,5 +34,6 @@ module.exports = {
       test: /\.html$/,
       loader: 'raw'
     }]
+
   }
 }

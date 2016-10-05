@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/karma/bin/karma start",
-    "start": "node node_modules/.bin/webpack-dev-server --content-base app --hot"
+    "start": "node node_modules/.bin/webpack-dev-server --content-base app --hot --history-api-fallback"
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,9 @@
   },
   "dependencies": {
     "angular": "^1.5.8",
+    "angular-jwt": "^0.1.5",
+    "angular-ui-bootstrap": "^2.1.4",
+    "angular-ui-router": "^0.3.1",
     "bootstrap": "^3.3.7",
     "jquery": "^3.1.1",
     "karma-es6-shim": "^1.0.0"
