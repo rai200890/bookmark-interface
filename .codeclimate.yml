@@ -1,7 +1,16 @@
----
 engines:
-  fixme:
+  eslint:
     enabled: true
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript
 ratings:
-  paths: []
-exclude_paths: []
+  paths:
+  - "**.js"
+exclude_paths:
+- tests/
+- node_modules/
