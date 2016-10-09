@@ -1,12 +1,9 @@
 'use strict';
 var webpack = require('webpack'),
     path = require('path'),
-    dotenv = require('dotenv'),
     ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var APP = __dirname + '/app';
-
-dotenv.config();
 
 module.exports = {
     context: APP,
@@ -14,7 +11,6 @@ module.exports = {
         app: ['webpack/hot/dev-server', './app.module.js', './app.css']
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery"
@@ -22,7 +18,10 @@ module.exports = {
         new ExtractTextPlugin("[name].css"),
         new webpack.EnvironmentPlugin([
             "API_URL"
-        ])
+        ]),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.optimize.AggressiveMergingPlugin()
     ],
     output: {
         path: APP,

@@ -27,6 +27,9 @@ node_modules
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
+#projectv build files
+dist/
+
 # Dependency directories
 node_modules
 jspm_packages

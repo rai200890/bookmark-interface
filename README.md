@@ -24,3 +24,10 @@ Consumes the [Bookmark-API](https://github.com/rai200890/bookmark-api)
 ```bash
   npm start #run app at localhost:8080
 ```
+
+##Build
+
+```bash
+  npm run build
+  npm run build:production
+```

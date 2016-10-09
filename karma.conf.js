@@ -1,79 +1,98 @@
 // Karma configuration
 // Generated on Mon Oct 03 2016 21:51:13 GMT-0300 (BRT)
+var webpack = require('webpack');
+var path = require('path');
 
 module.exports = function(config) {
-  config.set({
+    config.set({
 
-    // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
-
-
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
-
-    // list of files / patterns to load in the browser
-    files: [
-      'tests/tests.webpack.js',
-      'tests/*.js',
-    ],
-
-    // list of files to exclude
-    exclude: [
-      'tests/vendor.js',
-    ],
+        // base path that will be used to resolve all patterns (eg. files, exclude)
+        basePath: '',
 
 
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      'tests/*.js': ['webpack'],
-      'app/index.js': ['webpack'],
-    },
+        // frameworks to use
+        // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+        frameworks: ['jasmine'],
 
-    webpack: {
-      //
-      webpackMiddleware: {
-        noInfo: false,
-        stats: {
-          colors: true
-        }
-      },
-   },
-     // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+        // list of files / patterns to load in the browser
+        files: [
+            'tests/tests.webpack.js',
+            'tests/**/*.js',
+        ],
+
+        // list of files to exclude
+        exclude: [
+        ],
 
 
-    // web server port
-    port: 9876,
+        // preprocess matching files before serving them to the browser
+        // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+        preprocessors: {
+            'tests/**/*.js': ['webpack']
+        },
+
+        webpack: {
+            module: {
+                loaders: [{
+                    test: /\.html$/,
+                    loader: 'raw'
+                },
+                {
+                     test: /\.js$/,
+                     exclude: [/node_modules/, /tests/],
+                     loader: 'istanbul-instrumenter'
+                 }]
+            },
+            plugins: [
+                new webpack.DefinePlugin({
+                    'process.env': {
+                        API_URL: JSON.stringify('http://localhost:5000')
+                    }
+                })
+            ]
+        },
+        webpackMiddleware: {
+            noInfo: false,
+            stats: {
+                colors: true
+            }
+        },
+        // test results reporter to use
+        // possible values: 'dots', 'progress'
+        // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+        reporters: ['mocha', 'coverage'],
+        coverageReporter: {
+          type: 'text'
+        },
+
+        // web server port
+        port: 9876,
 
 
-    // enable / disable colors in the output (reporters and logs)
-    colors: true,
+        // enable / disable colors in the output (reporters and logs)
+        colors: true,
 
 
-    // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_ERROR,
+        // level of logging
+        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+        logLevel: config.LOG_ERROR,
 
 
-    // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+        // enable / disable watching file and executing tests whenever any file changes
+        autoWatch: false,
 
 
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+        // start these browsers
+        // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+        browsers: ['PhantomJS'],
 
 
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true,
+        // Continuous Integration mode
+        // if true, Karma captures browsers, runs the tests and exits
+        singleRun: true,
 
-    // Concurrency level
-    // how many browser should be started simultaneous
-    concurrency: Infinity
-  })
+        // Concurrency level
+        // how many browser should be started simultaneous
+        concurrency: Infinity
+    })
 }
