@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start",
-    "start": "node node_modules/.bin/webpack-dev-server --content-base app --hot --history-api-fallback"
+    "test": "./node_modules/.bin/karma start",
+    "build": "./node_modules/.bin/webpack -b",
+    "build:production": "./node_modules/.bin/webpack -b --config webpack.production.config.js",
+    "start": "./node_modules/.bin/webpack-dev-server --content-base app --hot --history-api-fallback"
   },
   "repository": {
     "type": "git",

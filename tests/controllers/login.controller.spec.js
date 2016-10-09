@@ -47,4 +47,11 @@ describe("LoginController", function() {
             });
         });
     });
+    describe('#closeErrors', function() {
+        it('should remove all error messages', function() {
+            controller.errors = ['Invalid credentials'];
+            controller.closeErrors();
+            expect(controller.errors).toEqual([]);
+        });
+    });
 });
