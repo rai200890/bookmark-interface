@@ -1,6 +1,7 @@
 // Karma configuration
 // Generated on Mon Oct 03 2016 21:51:13 GMT-0300 (BRT)
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = function(config) {
     config.set({
@@ -21,15 +22,13 @@ module.exports = function(config) {
 
         // list of files to exclude
         exclude: [
-            'tests/vendor.js',
         ],
 
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'tests/**/*.js': ['webpack'],
-            'app/index.js': ['webpack'],
+            'tests/**/*.js': ['webpack']
         },
 
         webpack: {
@@ -37,7 +36,12 @@ module.exports = function(config) {
                 loaders: [{
                     test: /\.html$/,
                     loader: 'raw'
-                }]
+                },
+                {
+                     test: /\.js$/,
+                     exclude: [/node_modules/, /tests/],
+                     loader: 'istanbul-instrumenter'
+                 }]
             },
             plugins: [
                 new webpack.DefinePlugin({
@@ -56,8 +60,10 @@ module.exports = function(config) {
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['mocha'],
-
+        reporters: ['mocha', 'coverage'],
+        coverageReporter: {
+          type: 'text'
+        },
 
         // web server port
         port: 9876,
