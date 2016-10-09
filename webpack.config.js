@@ -11,7 +11,7 @@ dotenv.config();
 module.exports = {
     context: APP,
     entry: {
-        app: ['webpack/hot/dev-server', './app.js', './app.css']
+        app: ['webpack/hot/dev-server', './app.module.js', './app.css']
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
@@ -21,7 +21,7 @@ module.exports = {
         }),
         new ExtractTextPlugin("[name].css"),
         new webpack.DefinePlugin({
-            'process.env.API_URL': process.env.API_URL
+            'process.env.API_URL': JSON.stringify(process.env.API_URL)
         })
     ],
     output: {
