@@ -6,8 +6,10 @@ var jwt = require('angular-jwt');
 
 var loginController = require('./controllers/login.controller');
 var signUpController = require('./controllers/signup.controller');
+var bookmarkListController = require('./controllers/bookmark.list.controller');
 
-var auth = require('./services/auth.service');
+var auth = require('./services/auth');
+var bookmark = require('./services/bookmark');
 
 var MODULE_NAME = 'app';
 var API_URL = process.env.API_URL;
@@ -18,7 +20,9 @@ var run = require('./app.run');
 var app = angular.module(MODULE_NAME, [uirouter, uibootstrap, localstorage, jwt])
     .controller('LoginController', loginController)
     .controller('SignUpController', signUpController)
+    .controller('BookmarkListController', bookmarkListController)
     .service('Auth', auth)
+    .service('Bookmark', bookmark)
     .constant('API_URL', API_URL)
     .config(config).run(run);
 
