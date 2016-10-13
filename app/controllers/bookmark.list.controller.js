@@ -58,7 +58,7 @@ function BookmarkListController(Bookmark) {
 
   loadBookmarks();
 
-};
+}
 BookmarkListController.$inject = ['Bookmark'];
 
 module.exports = BookmarkListController;

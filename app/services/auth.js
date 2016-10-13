@@ -24,7 +24,7 @@ function Auth($http, API_URL, localStorageService, jwtHelper) {
     this.getToken = function() {
         return localStorageService.get('access_token', null);
     };
-};
+}
 Auth.$inject = ['$http', 'API_URL', 'localStorageService', 'jwtHelper'];
 
 module.exports = Auth

@@ -15,7 +15,7 @@ function LoginController(Auth, $state) {
     ctrl.closeErrors = function() {
         ctrl.errors = [];
     };
-};
+}
 LoginController.$inject = ['Auth', '$state'];
 
 module.exports = LoginController

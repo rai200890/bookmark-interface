@@ -15,7 +15,7 @@ function Bookmark($http, API_URL) {
     this.delete = function(id) {
         return $http.delete(API_URL + "/bookmarks/" + id);
     };
-};
+}
 Bookmark.$inject = ['$http', 'API_URL'];
 
 module.exports = Bookmark;
