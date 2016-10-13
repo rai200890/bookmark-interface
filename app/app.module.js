@@ -8,6 +8,8 @@ var loginController = require('./controllers/login.controller');
 var signUpController = require('./controllers/signup.controller');
 var bookmarkListController = require('./controllers/bookmark.list.controller');
 
+var bmAlerts = require("./directives/bmAlerts");
+
 var auth = require('./services/auth');
 var bookmark = require('./services/bookmark');
 
@@ -21,9 +23,11 @@ var app = angular.module(MODULE_NAME, [uirouter, uibootstrap, localstorage, jwt]
     .controller('LoginController', loginController)
     .controller('SignUpController', signUpController)
     .controller('BookmarkListController', bookmarkListController)
+    .directive('bmAlerts', bmAlerts)
     .service('Auth', auth)
     .service('Bookmark', bookmark)
     .constant('API_URL', API_URL)
     .config(config).run(run);
+
 
 module.exports = app;

@@ -9,10 +9,6 @@ function BookmarkListController(Bookmark) {
   ctrl.newBookmark = {};
   ctrl.alerts = [];
 
-  ctrl.closeAlert = function(index) {
-    ctrl.alerts.splice(index, 1);
-  };
-
   ctrl.create = function() {
     Bookmark.create(ctrl.newBookmark)
       .success(function(response) {
@@ -32,19 +28,19 @@ function BookmarkListController(Bookmark) {
 
   ctrl.delete = function(bookmark) {
     Bookmark.delete(bookmark.id)
-    .success(function(){
-      ctrl.alerts.push({
-        "type": "success",
-        "messages": ["Bookmark " + bookmark.id + " successfully deleted!"]
+      .success(function() {
+        ctrl.alerts.push({
+          "type": "success",
+          "messages": ["Bookmark " + bookmark.id + " successfully deleted!"]
+        });
+        loadBookmarks();
+      })
+      .error(function(response) {
+        ctrl.alerts.push({
+          "type": "danger",
+          "messages": response.errors
+        });
       });
-      loadBookmarks();
-    })
-    .error(function(response){
-      ctrl.alerts.push({
-        "type": "danger",
-        "messages": response.errors
-      });
-    });
 
   };
 

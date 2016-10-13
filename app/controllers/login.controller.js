@@ -2,15 +2,17 @@ function LoginController(Auth, $state) {
     var ctrl = this;
 
     ctrl.credentials = {};
-    ctrl.errors = [];
+    ctrl.alerts = [];
 
     ctrl.login = function() {
         Auth.login(ctrl.credentials).success(function(response) {
             $state.go('protected.bookmarks');
         }).error(function(response, statusCode) {
-            ctrl.errors = response.errors
+            ctrl.alerts.push({
+              type: "danger",
+              messages: response.errors
+            });
         });
-
     };
     ctrl.closeErrors = function() {
         ctrl.errors = [];
