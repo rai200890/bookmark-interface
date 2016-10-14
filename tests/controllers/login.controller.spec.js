@@ -43,15 +43,8 @@ describe("LoginController", function() {
                 controller.login(credentials);
                 httpBackend.flush();
                 expect(state.current.name).toBe('login');
-                expect(controller.errors).toEqual(['Invalid credentials']);
+                expect(controller.alerts[0].messages).toEqual(['Invalid credentials']);
             });
-        });
-    });
-    describe('#closeErrors', function() {
-        it('should remove all error messages', function() {
-            controller.errors = ['Invalid credentials'];
-            controller.closeErrors();
-            expect(controller.errors).toEqual([]);
         });
     });
 });

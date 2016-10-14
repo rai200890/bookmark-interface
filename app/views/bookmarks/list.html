@@ -1,11 +1,20 @@
 <div class="row">
-  <h2 class="text-center">Bookmark List</h2>
+  <h2 class="text-center">Bookmarks</h2>
 </div>
 <div class="row">
   <bm-alerts bm-items="ctrl.alerts"></bm-alerts>
 </div>
 <div class="row">
   <div ng-include="'views/bookmarks/new.html'">
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4 xs-hidden">
+  </div>
+  <div class="col-md-4 col-xs-12">
+    <ul uib-pagination total-items="ctrl.pagination.total" items-per-page="ctrl.pagination.per_page" ng-model="ctrl.pagination.page" ng-change="ctrl.loadBookmarks()"></ul>
+  </div>
+  <div class="col-md-4 xs-hidden">
   </div>
 </div>
 <div class="row">
@@ -25,14 +34,19 @@
     <tbody>
       <tr ng-repeat="bookmark in ctrl.bookmarks">
         <td>{{bookmark.id}}</td>
-        <td>{{bookmark.title}}</td>
-        <td><a ng-href="bookmark.url">{{bookmark.url}}</a></td>
-        <td>{{bookmark.user.name}}</td>
         <td>
-          <div class="btn-group">
-            <button class="btn btn-primary btn-sm" name="edit"><span class="glyphicon glyphicon-pencil"></span></button>
-            <button class="btn btn-danger btn-sm" name="delete" ng-click="ctrl.delete(bookmark)"><span class="glyphicon glyphicon-minus"></span></button>
-          </div>
+          <input type="text" class="form-control" ng-model="bookmark.title" ng-disabled="!bookmark.editing" />
+        </td>
+        <td>
+          <input type="url" class="form-control" ng-model="bookmark.url" ng-disabled="!bookmark.editing" />
+        </td>
+        <td>{{bookmark.user.username}}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" name="edit" ng-show="!bookmark.editing" ng-click="ctrl.edit(bookmark)"><span class="glyphicon glyphicon-pencil"></span></button>
+          <button class="btn btn-success btn-sm" name="save" ng-show="bookmark.editing" ng-click="ctrl.save(bookmark)"><span class="glyphicon glyphicon-ok"></span></button>
+          <button class="btn btn-danger btn-sm" mwl-confirm title="{{'Delete bookmark ' + bookmark.id}}" confirm-text="YES" cancel-text="NO" message="Are you sure?" on-confirm="ctrl.delete(bookmark)" confirm-button-type="danger" cancel-button-type="warning">
+            <span class="glyphicon glyphicon-minus"></span>
+          </button>
         </td>
       </tr>
     </tbody>

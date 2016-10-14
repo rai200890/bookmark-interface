@@ -2,7 +2,7 @@ function BookmarkListController(Bookmark) {
   var ctrl = this;
   ctrl.bookmarks = [];
   ctrl.pagination = {
-    per_page: 15,
+    per_page: 10,
     page: 1
   };
 
@@ -16,7 +16,28 @@ function BookmarkListController(Bookmark) {
           "type": "success",
           "messages": ["Bookmark successfully created!"]
         });
-        loadBookmarks();
+        ctrl.loadBookmarks();
+      })
+      .error(function(response) {
+        ctrl.alerts.push({
+          "type": "danger",
+          "messages": response.errors
+        });
+      });
+  };
+
+  ctrl.edit = function(bookmark) {
+    bookmark.editing = true;
+  };
+
+  ctrl.save = function(bookmark) {
+    Bookmark.update(bookmark.id, bookmark)
+      .success(function() {
+        ctrl.alerts.push({
+          "type": "success",
+          "messages": ["Bookmark " + bookmark.id + " successfully updated!"]
+        });
+        bookmark.editing = false;
       })
       .error(function(response) {
         ctrl.alerts.push({
@@ -33,7 +54,7 @@ function BookmarkListController(Bookmark) {
           "type": "success",
           "messages": ["Bookmark " + bookmark.id + " successfully deleted!"]
         });
-        loadBookmarks();
+        ctrl.loadBookmarks();
       })
       .error(function(response) {
         ctrl.alerts.push({
@@ -41,10 +62,9 @@ function BookmarkListController(Bookmark) {
           "messages": response.errors
         });
       });
-
   };
 
-  loadBookmarks = function() {
+  ctrl.loadBookmarks = function() {
     Bookmark.index(ctrl.pagination.page, ctrl.pagination.per_page)
       .success(function(response) {
         ctrl.bookmarks = response.bookmarks;
@@ -52,9 +72,9 @@ function BookmarkListController(Bookmark) {
       });
   };
 
-  loadBookmarks();
-
+  ctrl.loadBookmarks();
 }
+
 BookmarkListController.$inject = ['Bookmark'];
 
 module.exports = BookmarkListController;

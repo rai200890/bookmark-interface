@@ -3,6 +3,7 @@ var uirouter = require('angular-ui-router');
 var uibootstrap = require('angular-ui-bootstrap');
 var localstorage = require('angular-local-storage');
 var jwt = require('angular-jwt');
+var angularBootstrapConfirm = require('angular-bootstrap-confirm');
 
 var loginController = require('./controllers/login.controller');
 var signUpController = require('./controllers/signup.controller');
@@ -19,7 +20,7 @@ var API_URL = process.env.API_URL;
 var config = require('./app.config');
 var run = require('./app.run');
 
-var app = angular.module(MODULE_NAME, [uirouter, uibootstrap, localstorage, jwt])
+var app = angular.module(MODULE_NAME, [uirouter, uibootstrap, localstorage, jwt, angularBootstrapConfirm])
     .controller('LoginController', loginController)
     .controller('SignUpController', signUpController)
     .controller('BookmarkListController', bookmarkListController)

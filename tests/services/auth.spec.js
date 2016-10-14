@@ -12,7 +12,7 @@ describe("Auth", function() {
     describe("#login", function() {
         describe("with valid credentials", function() {
             beforeEach(function() {
-                httpBackend.when('POST', 'http://localhost:5000/auth').respond(200, {
+                httpBackend.expectPOST('http://localhost:5000/auth').respond(200, {
                     'access_token': token
                 });
                 spyOn(localStorageService, 'set');
