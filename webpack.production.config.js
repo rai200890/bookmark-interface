@@ -17,7 +17,8 @@ module.exports = {
         }),
         new ExtractTextPlugin("[name].css"),
         new webpack.EnvironmentPlugin([
-            "API_URL"
+            "API_URL",
+            "WHITELISTED_DOMAINS"
         ]),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin(),
