@@ -28,7 +28,10 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
       abstract: true,
       template: require('./views/home.html'),
       data: {
-        requiresLogin: true
+        requiresLogin: true,
+        permissions: {
+          only: ['admin', 'client']
+        }
       }
     }).state('protected.bookmarks', {
       url: "/bookmarks",
@@ -36,11 +39,28 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
       controllerAs: "ctrl",
       template: require('./views/bookmarks/list.html'),
       data: {
-        requiresLogin: true
+        requiresLogin: true,
+        permissions: {
+          only: ['admin', 'client']
+        }
+      }
+    }).state('protected.users', {
+      url: "/users",
+      controller: "UserListController",
+      controllerAs: "ctrl",
+      template: require('./views/users/list.html'),
+      data: {
+        requiresLogin: true,
+        permissions: {
+          only: ['admin']
+        }
       }
     });
 
-  $urlRouterProvider.otherwise('/bookmarks');
+    $urlRouterProvider.otherwise( function($injector) {
+      var $state = $injector.get("$state");
+      $state.go('/bookmarks');
+    });
 
   localStorageServiceProvider
     .setPrefix('bookmarkApp')

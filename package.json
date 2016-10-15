@@ -47,6 +47,8 @@
     "angular-bootstrap-confirm": "^2.4.1",
     "angular-jwt": "^0.1.5",
     "angular-local-storage": "^0.5.0",
+    "angular-permission": "^4.0.6",
+    "angular-route": "^1.5.8",
     "angular-sanitize": "^1.5.8",
     "angular-ui-bootstrap": "^2.1.4",
     "angular-ui-router": "^0.3.1",

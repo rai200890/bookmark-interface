@@ -1,0 +1,31 @@
+<div class="row">
+  <h2 class="text-center">Users</h2>
+</div>
+<div class="row">
+  <bm-alerts bm-items="ctrl.alerts"></bm-alerts>
+</div>
+<div class="row">
+  <table class="table table-striped table-bordered" ng-show="ctrl.users.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="user in ctrl.users">
+        <td>{{user.id}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" name="edit" ng-click="ctrl.edit(user)"><span class="glyphicon glyphicon-pencil"></span></button>
+          <button class="btn btn-danger btn-sm" mwl-confirm title="{{'Delete user ' + user.id}}" confirm-text="YES" cancel-text="NO" message="Are you sure?" on-confirm="ctrl.delete(bookmark)" confirm-button-type="danger" cancel-button-type="warning">
+            <span class="glyphicon glyphicon-minus"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

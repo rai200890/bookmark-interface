@@ -8,12 +8,15 @@ var angularBootstrapConfirm = require('angular-bootstrap-confirm');
 var loginController = require('./controllers/login.controller');
 var signUpController = require('./controllers/signup.controller');
 var bookmarkListController = require('./controllers/bookmark.list.controller');
+var userListController = require('./controllers/user.list.controller');
 
 var bmAlerts = require("./directives/bmAlerts");
 
 var auth = require('./services/auth');
 var bookmark = require('./services/bookmark');
 var user = require('./services/user');
+var permission = require('angular-permission/dist/angular-permission');
+var uiPermission = require('angular-permission/dist/angular-permission-ui');
 
 
 var MODULE_NAME = 'app';
@@ -23,10 +26,12 @@ var WHITELISTED_DOMAINS = process.env.WHITELISTED_DOMAINS.split(",");
 var config = require('./app.config');
 var run = require('./app.run');
 
-var app = angular.module(MODULE_NAME, [uirouter, uibootstrap, localstorage, jwt, angularBootstrapConfirm])
+var app = angular.module(MODULE_NAME, [uirouter, uibootstrap, localstorage, jwt, angularBootstrapConfirm,
+  permission, uiPermission])
     .controller('LoginController', loginController)
     .controller('SignUpController', signUpController)
     .controller('BookmarkListController', bookmarkListController)
+    .controller('UserListController', userListController)
     .directive('bmAlerts', bmAlerts)
     .service('Auth', auth)
     .service('Bookmark', bookmark)
