@@ -1,0 +1,16 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">New Bookmark</div>
+  <div class="panel-body">
+    <form class="form-inline" name="new_bookmark">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" name="title" placeholder="Bookmark title" ng-model="ctrl.newBookmark.title" ng-required="true">
+      </div>
+      <div class="form-group">
+        <label for="title">URL</label>
+        <input type="url" class="form-control" name="url" placeholder="http://www.page.com.br" ng-model="ctrl.newBookmark.url" ng-required="true">
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm" ng-disabled="new_bookmark.$invalid" ng-click="ctrl.create()"><span class="glyphicon glyphicon-plus"></span></button>
+    </form>
+  </div>
+</div>

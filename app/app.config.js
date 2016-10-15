@@ -23,6 +23,8 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
             template: require('./views/home.html'),
         }).state('protected.bookmarks', {
             url: "/bookmarks",
+            controller: "BookmarkListController",
+            controllerAs: "ctrl",
             template: require('./views/bookmarks/list.html')
         });
 
@@ -34,15 +36,15 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
         .setStorageType('sessionStorage');
 
     jwtOptionsProvider.config({
+        whiteListedDomains: ["localhost"],
         tokenGetter: ['Auth', function(Auth) {
-            var token = Auth.getToken();
-            return token;
+            return Auth.getToken();
         }],
         unauthenticatedRedirectPath: '/login',
-        whiteListedDomains: ['localhost:5000']
     });
 
-    $httpProvider.interceptors.push('jwtInterceptor');
+$httpProvider.interceptors.push('jwtInterceptor');
+
 };
 config.$inject = ['$stateProvider', '$locationProvider', '$urlRouterProvider', 'localStorageServiceProvider', '$httpProvider', 'jwtOptionsProvider'];
 
