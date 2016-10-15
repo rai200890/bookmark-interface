@@ -46,7 +46,8 @@ module.exports = function(config) {
             plugins: [
                 new webpack.DefinePlugin({
                     'process.env': {
-                        API_URL: JSON.stringify('http://localhost:5000')
+                        API_URL: JSON.stringify('http://localhost:5000'),
+                        WHITELISTED_DOMAINS: JSON.stringify('localhost')
                     }
                 })
             ]

@@ -1,10 +1,12 @@
-function run(Auth, $state, authManager, jwtHelper) {
-    var token = Auth.getToken();
-    if (token === null || jwtHelper.isTokenExpired(token)) {
-        $state.go('login');
+function run(Auth, $rootScope, $state, authManager) {
+  $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+    if (!Auth.isTokenValid() && $state.current.name !== 'signup') {
+      $state.go('login');
     };
+
     authManager.checkAuthOnRefresh();
     authManager.redirectWhenUnauthenticated();
+  });
 };
-run.$inject = ['Auth', '$state', 'authManager', 'jwtHelper'];
+run.$inject = ['Auth', '$rootScope', '$state', 'authManager', 'jwtHelper'];
 module.exports = run;

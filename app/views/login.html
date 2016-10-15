@@ -18,11 +18,6 @@
           <label for="password">Password</label>
           <input ng-model="ctrl.credentials.password" ng-required="true" name="password" type="password" class="form-control input-lg" placeholder="Password">
         </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" ng-model="ctrl.saveCredentials"> Save Password
-          </label>
-        </div>
         <button ng-click="ctrl.login()" ng-disabled="login.$invalid" type="submit" class="btn btn-lg btn-primary">Login</button>
         <button ui-sref="signup" class="btn btn-lg btn-success">Sign-Up</button>
       </form>

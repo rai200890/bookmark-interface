@@ -21,7 +21,8 @@ module.exports = {
         }),
         new ExtractTextPlugin("[name].css"),
         new webpack.EnvironmentPlugin([
-            "API_URL"
+            "API_URL",
+            "WHITELISTED_DOMAINS"
         ])
     ],
     output: {
