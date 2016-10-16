@@ -1,4 +1,4 @@
-function Auth($http, API_URL, localStorageService, jwtHelper, PermRoleStore, User) {
+function Auth($http, API_URL, localStorageService, jwtHelper, PermRoleStore, User, $q) {
   this.login = function(credentials, saveCredentials) {
     var url = API_URL + "/auth";
     return $http({
@@ -18,6 +18,19 @@ function Auth($http, API_URL, localStorageService, jwtHelper, PermRoleStore, Use
       });
   };
 
+  this.getCurrentUser = function() {
+    var deferred = $q.defer();
+    var userId = localStorageService.get('user_id');
+
+    User.show(userId).success(function(response) {
+      deferred.resolve(response.user);
+    }).error(function() {
+      deferred.reject(null);
+    });
+
+    return deferred.promise;
+  };
+
   this.getToken = function() {
     return localStorageService.get('access_token', null);
   };
@@ -27,6 +40,6 @@ function Auth($http, API_URL, localStorageService, jwtHelper, PermRoleStore, Use
     return token !== null && !jwtHelper.isTokenExpired(token);
   };
 }
-Auth.$inject = ['$http', 'API_URL', 'localStorageService', 'jwtHelper', 'PermRoleStore', 'User'];
+Auth.$inject = ['$http', 'API_URL', 'localStorageService', 'jwtHelper', 'PermRoleStore', 'User', '$q'];
 
 module.exports = Auth

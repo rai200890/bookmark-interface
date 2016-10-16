@@ -6,7 +6,7 @@ describe("SignUpController", function() {
   httpBackend = null;
   beforeEach(angular.mock.module('app'));
   describe("#createUser", function() {
-    beforeEach(angular.mock.inject(function($controller, User, $timeout, $state, $httpBackend) {
+    beforeEach(angular.mock.inject(function($controller, User, _PermRoleStore_, $timeout, $state, $httpBackend) {
       httpBackend = $httpBackend;
       state = $state;
       timeout = $timeout;
@@ -17,7 +17,7 @@ describe("SignUpController", function() {
       });
     }));
     describe("with valid params", function() {
-      beforeEach(function() {
+      beforeEach(function(){
         httpBackend.when('POST', 'http://localhost:5000/users').respond(200, {
           "user": {
             "id": 1,
@@ -26,7 +26,8 @@ describe("SignUpController", function() {
             "password": "pass"
           }
         });
-        spyOn(state, "go");
+
+        spyOn(state, "go").and.callThrough();
       });
       it("should display success message and redirect to login", function() {
         controller.newUser = {
