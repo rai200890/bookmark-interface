@@ -44,7 +44,8 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
       data: {
         requiresLogin: true,
         permissions: {
-          only: ['admin', 'client']
+          'only': ['admin', 'client'],
+          'redirectTo': 'unauthorized'
         }
       }
     }).state('protected.bookmarks', {
@@ -55,7 +56,8 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
       data: {
         requiresLogin: true,
         permissions: {
-          only: ['admin', 'client']
+          only: ['admin', 'client'],
+          redirectTo: 'unauthorized'
         }
       }
     }).state('protected.users', {
@@ -66,10 +68,11 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
       data: {
         requiresLogin: true,
         permissions: {
-          only: ['admin']
+          except: 'client',
+          redirectTo: 'unauthorized'
         }
-      }
-    });
+    }
+  });
 
   $urlRouterProvider.otherwise(function($injector) {
     var $state = $injector.get("$state");
