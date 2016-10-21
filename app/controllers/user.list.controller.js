@@ -3,21 +3,6 @@ function UserListController(User) {
   ctrl.users = [];
   ctrl.alerts = [];
 
-  ctrl.edit = function(user) {
-    User.update(user.id, user)
-      .success(function() {
-        ctrl.alerts.push({
-          "type": "success",
-          "messages": ["User " + user.id + " successfully updated!"]
-        });
-      }).error(function(response) {
-        ctrl.alerts.push({
-          "type": "danger",
-          "messages": response.errors
-        });
-      });
-  };
-
   ctrl.delete = function(user) {
     User.delete(user.id).success(function() {
         ctrl.alerts.push({

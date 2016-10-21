@@ -1,0 +1,27 @@
+<div class="row">
+  <h2 class="text-center">User</h2>
+</div>
+<div class="row">
+  <bm-alerts bm-items="ctrl.alerts"></bm-alerts>
+</div>
+<div class="row">
+  <form name="edit">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input ng-model="ctrl.user.username" ng-required="true" name="username" type="text" ng-disabled="true" class="form-control" placeholder="Username">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input ng-model="ctrl.user.email" ng-required="true" name="email" type="text" ng-disabled="true" class="form-control" placeholder="user@mail.com">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input ng-model="ctrl.user.password" ng-required="true" name="password" type="password" class="form-control" placeholder="Password">
+    </div>
+    <div class="form-group">
+      <label for="password">Confirm Password</label>
+      <input ng-model="ctrl.passwordConfirmation" ng-required="true" name="confirm_password" type="password" class="form-control" placeholder="Confirm Password">
+    </div>
+    <button ng-click="ctrl.save()" ng-disabled="edit.$invalid || ctrl.passwordConfirmation != ctrl.user.password" type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>

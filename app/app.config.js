@@ -60,7 +60,7 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
           redirectTo: 'unauthorized'
         }
       }
-    }).state('protected.users', {
+    }).state('protected.user_list', {
       url: "/users",
       controller: "UserListController",
       controllerAs: "ctrl",
@@ -68,11 +68,23 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
       data: {
         requiresLogin: true,
         permissions: {
-          except: 'client',
+          only: 'admin',
           redirectTo: 'unauthorized'
         }
     }
-  });
+  }).state('protected.user_edit', {
+    url: "/users/:id",
+    controller: "UserEditController",
+    controllerAs: "ctrl",
+    template: require('./views/users/edit.html'),
+    data: {
+      requiresLogin: true,
+      permissions: {
+        only: 'admin',
+        redirectTo: 'unauthorized'
+      }
+  }
+});
 
   $urlRouterProvider.otherwise(function($injector) {
     var $state = $injector.get("$state");

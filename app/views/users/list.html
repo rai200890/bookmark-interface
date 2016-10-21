@@ -20,10 +20,9 @@
         <td>{{user.username}}</td>
         <td>{{user.email}}</td>
         <td>
-          <button class="btn btn-primary btn-sm" name="edit" ng-click="ctrl.edit(user)"><span class="glyphicon glyphicon-pencil"></span></button>
+          <a class="btn btn-primary btn-sm" name="edit" ui-sref="protected.user_edit({id: user.id})"><span class="glyphicon glyphicon-pencil"></span></a>
           <button class="btn btn-danger btn-sm" mwl-confirm title="{{'Delete user ' + user.id}}" confirm-text="YES" cancel-text="NO" message="Are you sure?" on-confirm="ctrl.delete(bookmark)" confirm-button-type="danger" cancel-button-type="warning">
-            <span class="glyphicon glyphicon-minus"></span>
-          </button>
+            <span class="glyphicon glyphicon-minus"></span></button>
         </td>
       </tr>
     </tbody>
