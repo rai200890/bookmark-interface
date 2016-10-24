@@ -40,11 +40,11 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
     })
     .state('protected', {
       abstract: true,
-      template: require('./views/home.html'),
+      template: require('./views/protected.html'),
       data: {
         requiresLogin: true
       }
-    }).state('protected.bookmarks', {
+    }).state('protected.bookmark_list', {
       url: "/bookmarks",
       controller: "BookmarkListController",
       controllerAs: "ctrl",

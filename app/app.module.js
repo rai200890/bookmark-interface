@@ -6,8 +6,10 @@ var angular = require('angular'),
   uiRouterExtras = require('ui-router-extras'),
   permission = require('angular-permission/dist/angular-permission'),
   uiPermission = require('angular-permission/dist/angular-permission-ui'),
-  angularBootstrapConfirm = require('angular-bootstrap-confirm');
+  angularBootstrapConfirm = require('angular-bootstrap-confirm'),
+  uiNavbar = require('ui-navbar');
 
+var navigationController = require('./controllers/navigation.controller');
 var loginController = require('./controllers/login.controller');
 var signUpController = require('./controllers/signup.controller');
 var bookmarkListController = require('./controllers/bookmark.list.controller');
@@ -29,8 +31,10 @@ var config = require('./app.config');
 var run = require('./app.run');
 
 var app = angular.module(MODULE_NAME, [uirouter, ('ct.ui.router.extras.core'),
-    permission, uiPermission, uibootstrap, localstorage, jwt, angularBootstrapConfirm,
+    permission, uiPermission, uibootstrap, localstorage, jwt,
+    angularBootstrapConfirm, 'ui.navbar'
   ])
+  .controller('NavigationController', navigationController)
   .controller('LoginController', loginController)
   .controller('SignUpController', signUpController)
   .controller('BookmarkListController', bookmarkListController)

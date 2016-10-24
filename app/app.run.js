@@ -2,7 +2,7 @@ function run(Auth, $state, authManager, PermRoleStore, localStorageService, User
 
     if (!Auth.isTokenValid() && $state.current.name !== 'signup') {
         $state.go('login');
-    };
+    }
 
     authManager.checkAuthOnRefresh();
     authManager.redirectWhenUnauthenticated();
@@ -36,6 +36,7 @@ function run(Auth, $state, authManager, PermRoleStore, localStorageService, User
         }
     });
 
-};
+}
+
 run.$inject = ['Auth', '$state', 'authManager', 'PermRoleStore', 'localStorageService', 'User', '$q'];
 module.exports = run;
