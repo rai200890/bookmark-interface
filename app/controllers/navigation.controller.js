@@ -1,25 +1,39 @@
-function NavigationController($scope, Auth, $state) {
-    $scope.currentUser = null;
-    $scope.bookmarks_menu = [{
+function NavigationController(Auth, $state) {
+    var ctrl = this;
+
+    ctrl.currentUser = null;
+
+    ctrl.bookmarks_menu = [{
         name: "Bookmark List",
         link: ".bookmark_list"
     }];
 
-    $scope.users_menu = [{
+    ctrl.users_menu = [{
         name: "Users List",
         link: ".user_list"
     }];
 
-    $scope.logout = function(){
-      Auth.logout();
-      $state.go('login');
+    ctrl.account_menu = [{
+      name: "Account Info",
+      link: ".account_info"
+    },{
+            name: "divider",
+            link: "#"
+
+    },{
+        name: "Logout",
+        link: "logout"
+    }];
+
+    ctrl.init = function(){
+      Auth.getCurrentUser().success(function(response) {
+          ctrl.currentUser = response.user;
+      });
     };
 
-    Auth.getCurrentUser().success(function(response) {
-        $scope.currentUser = response.user;
-    });
+    ctrl.init();
 }
 
-NavigationController.$inject = ['$scope', 'Auth', '$state'];
+NavigationController.$inject = ['Auth', '$state'];
 
 module.exports = NavigationController;

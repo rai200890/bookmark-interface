@@ -51,7 +51,7 @@ describe("UserEditController", function() {
                 httpBackend.flush();
                 expect(controller.alerts).toEqual([{
                     "type": "success",
-                    "messages": ["User 1 successfully updated!"]
+                    "messages": ["User info successfully updated!"]
                 }]);
                 expect(controller.passwordToBeChanged).toBe(false);
             });

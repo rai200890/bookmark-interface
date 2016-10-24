@@ -1,6 +1,5 @@
 function LoginController(Auth, $state) {
     var ctrl = this;
-
     ctrl.credentials = {};
     ctrl.alerts = [];
 
@@ -13,9 +12,6 @@ function LoginController(Auth, $state) {
               messages: response.errors
             });
         });
-    };
-    ctrl.closeErrors = function() {
-        ctrl.errors = [];
     };
 }
 LoginController.$inject = ['Auth', '$state'];

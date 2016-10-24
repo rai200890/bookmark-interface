@@ -45,6 +45,7 @@
   "dependencies": {
     "angular": "^1.5.8",
     "angular-bootstrap-confirm": "^2.4.1",
+    "angular-gravatar": "^0.4.2",
     "angular-jwt": "^0.1.5",
     "angular-local-storage": "^0.5.0",
     "angular-permission": "^4.0.6",

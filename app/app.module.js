@@ -1,41 +1,44 @@
 var angular = require('angular'),
-  uirouter = require('angular-ui-router'),
-  uibootstrap = require('angular-ui-bootstrap'),
-  localstorage = require('angular-local-storage'),
-  jwt = require('angular-jwt'),
-  uiRouterExtras = require('ui-router-extras'),
-  permission = require('angular-permission/dist/angular-permission'),
-  uiPermission = require('angular-permission/dist/angular-permission-ui'),
-  angularBootstrapConfirm = require('angular-bootstrap-confirm'),
-  uiNavbar = require('ui-navbar');
+    uirouter = require('angular-ui-router'),
+    uibootstrap = require('angular-ui-bootstrap'),
+    localstorage = require('angular-local-storage'),
+    jwt = require('angular-jwt'),
+    uiRouterExtras = require('ui-router-extras'),
+    permission = require('angular-permission/dist/angular-permission'),
+    uiPermission = require('angular-permission/dist/angular-permission-ui'),
+    angularBootstrapConfirm = require('angular-bootstrap-confirm'),
+    uiNavbar = require('ui-navbar'),
+    angularGravatar = require('angular-gravatar');
 
-var navigationController = require('./controllers/navigation.controller');
-var loginController = require('./controllers/login.controller');
-var signUpController = require('./controllers/signup.controller');
-var bookmarkListController = require('./controllers/bookmark.list.controller');
-var userEditController = require('./controllers/user.edit.controller');
-var userListController = require('./controllers/user.list.controller');
+var navigationController = require('./controllers/navigation.controller'),
+    loginController = require('./controllers/login.controller'),
+    logoutController = require('./controllers/logout.controller'),
+    signUpController = require('./controllers/signup.controller'),
+    bookmarkListController = require('./controllers/bookmark.list.controller'),
+    userEditController = require('./controllers/user.edit.controller'),
+    userListController = require('./controllers/user.list.controller');
 
 var bmAlerts = require("./directives/bmAlerts");
 
-var auth = require('./services/auth');
-var bookmark = require('./services/bookmark');
-var user = require('./services/user');
+var auth = require('./services/auth'),
+    bookmark = require('./services/bookmark'),
+    user = require('./services/user');
 
 
-var MODULE_NAME = 'app';
-var API_URL = process.env.API_URL;
-var WHITELISTED_DOMAINS = process.env.WHITELISTED_DOMAINS.split(",");
+var MODULE_NAME = 'app',
+    API_URL = process.env.API_URL,
+    WHITELISTED_DOMAINS = process.env.WHITELISTED_DOMAINS.split(",");
 
 var config = require('./app.config');
 var run = require('./app.run');
 
 var app = angular.module(MODULE_NAME, [uirouter, ('ct.ui.router.extras.core'),
     permission, uiPermission, uibootstrap, localstorage, jwt,
-    angularBootstrapConfirm, 'ui.navbar'
+    angularBootstrapConfirm, 'ui.navbar', 'ui.gravatar'
   ])
   .controller('NavigationController', navigationController)
   .controller('LoginController', loginController)
+  .controller('LogoutController', logoutController)
   .controller('SignUpController', signUpController)
   .controller('BookmarkListController', bookmarkListController)
   .controller('UserListController', userListController)
