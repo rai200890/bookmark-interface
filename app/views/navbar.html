@@ -1,0 +1,41 @@
+<div ng-controller="NavigationController as ctrl">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="home">Bookmark App</a>
+        </div>
+        <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+            <ul class="nav navbar-nav">
+                <li uib-dropdown>
+                    <a href="#" uib-dropdown-toggle>
+                        Bookmarks
+                        <b class='caret'></b>
+                    </a>
+                    <tree tree='ctrl.bookmarks_menu'></tree>
+                </li>
+                <li uib-dropdown permission permission-only="'ADMIN'">
+                    <a href="#" uib-dropdown-toggle>
+                        Users
+                        <span class='caret'></span>
+                    </a>
+                    <tree tree='ctrl.users_menu'></tree>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li uib-dropdown>
+                    <a href="#" uib-dropdown-toggle>
+                      <img gravatar-src="ctrl.currentUser.email" class="img-circle" gravatar-size="28">
+                      {{ctrl.currentUser.username}}
+                      <b class='caret'></b>
+                  </a>
+                    <tree tree='ctrl.account_menu'></tree>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

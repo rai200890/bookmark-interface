@@ -2,11 +2,14 @@ describe("Auth", function() {
     var service = null,
         httpBackend = null,
         localStorageService = null,
+        jwtHelper = null,
         token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJa9.eyJpZGVudGl0eSI6MSwiaWF0IjoxNDQ0OTE3NjQwLCJuYmYiOjE0NDQ5MTc2NDAsImV4cCI6MTQ0NDkxNzk0MH0.KPmI6WSjRjlpzecPvs3q_T3cJQvAgJvaQAPtk1abC_E';
     beforeEach(angular.mock.module('app'));
-    beforeEach(angular.mock.inject(function(Auth, $httpBackend, _localStorageService_) {
+    beforeEach(angular.mock.inject(function(Auth, _User_, _jwtHelper_, $httpBackend, _localStorageService_) {
         httpBackend = $httpBackend;
         service = Auth;
+        User = _User_;
+        jwtHelper = _jwtHelper_;
         localStorageService = _localStorageService_;
     }));
     describe("#login", function() {
@@ -29,11 +32,60 @@ describe("Auth", function() {
             });
         });
     });
+    describe("#logout", function() {
+        beforeEach(function() {
+            spyOn(localStorageService, 'remove').and.callThrough();
+        });
+        it("should remove access token and user id from session storage", function() {
+            service.logout();
+            expect(localStorageService.remove).toHaveBeenCalledWith('access_token');
+            expect(localStorageService.remove).toHaveBeenCalledWith('user_id');
+        });
+    });
+    describe("#getCurrentUser", function() {
+        beforeEach(function() {
+            spyOn(User, 'show').and.callThrough();
+            spyOn(service, 'getUserId').and.callThrough();
+        });
+        it("should fetch current user details", function() {
+            service.getCurrentUser();
+            expect(User.show).toHaveBeenCalledWith(service.getUserId());
+        });
+    });
     describe('#getToken', function() {
-      it("should return token from session storage", function(){
-        spyOn(localStorageService, 'get');
-        service.getToken();
-        expect(localStorageService.get).toHaveBeenCalledWith('access_token', null);
-      });
+        it("should return token from session storage", function() {
+            spyOn(localStorageService, 'get');
+            service.getToken();
+            expect(localStorageService.get).toHaveBeenCalledWith('access_token', null);
+        });
+    });
+    describe('#getUserId', function() {
+        it("should return user id from session storage", function() {
+            spyOn(localStorageService, 'get');
+            service.getUserId();
+            expect(localStorageService.get).toHaveBeenCalledWith('user_id');
+        });
+    });
+    describe('#isTokenValid', function() {
+        describe('null token', function() {
+            it("should return false", function() {
+                spyOn(service, 'getToken').and.returnValue(null);
+                expect(service.isTokenValid()).toBe(false);
+            });
+        });
+        describe('expired token', function() {
+            it("should return false", function() {
+                spyOn(service, 'getToken').and.returnValue(token);
+                spyOn(jwtHelper, 'isTokenExpired').and.returnValue(true);
+                expect(service.isTokenValid()).toBe(false);
+            });
+        });
+        describe('to be expired token', function() {
+            it("should return true", function() {
+                spyOn(service, 'getToken').and.returnValue(token);
+                spyOn(jwtHelper, 'isTokenExpired').and.returnValue(false);
+                expect(service.isTokenValid()).toBe(true);
+            });
+        });
     });
 });

@@ -21,12 +21,21 @@ function Auth($http, API_URL, localStorageService, jwtHelper, PermRoleStore, Use
       });
   };
 
+  self.logout = function(){
+    localStorageService.remove('access_token');
+    localStorageService.remove('user_id');
+  };
+
   self.getCurrentUser = function() {
-      return User.show(localStorageService.get('user_id'));
+      return User.show(self.getUserId());
   }
 
   self.getToken = function() {
     return localStorageService.get('access_token', null);
+  };
+
+  self.getUserId = function(){
+    return localStorageService.get('user_id');
   };
 
   self.isTokenValid = function() {

@@ -36,7 +36,7 @@ describe("LoginController", function() {
         };
         controller.login(credentials);
         httpBackend.flush();
-        expect(state.go).toHaveBeenCalledWith('protected.bookmarks');
+        expect(state.go).toHaveBeenCalledWith('protected.bookmark_list');
       });
     });
     describe("with invalid credentials", function() {

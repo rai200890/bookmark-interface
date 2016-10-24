@@ -43,9 +43,9 @@
                     <td permission permission-only="'ADMIN'">{{bookmark.user.username}}</td>
                     <td permission permission-only="'CLIENT'">
                       <div class="btn-group">
-                        <button class="btn btn-primary" name="edit" ng-if="!bookmark.editing" ng-click="ctrl.edit(bookmark)"><span class="glyphicon glyphicon-pencil"></span></button>
-                        <button class="btn btn-success" name="save" ng-if="bookmark.editing" ng-click="ctrl.save(bookmark)"><span class="glyphicon glyphicon-ok"></span></button>
-                        <button class="btn btn-danger" name="delete" mwl-confirm title="{{'Delete bookmark ' + bookmark.id}}" confirm-text="YES" cancel-text="NO" message="Are you sure?" on-confirm="ctrl.delete(bookmark)" confirm-button-type="danger" cancel-button-type="warning">
+                        <button class="btn btn-primary btn-xs" name="edit" ng-if="!bookmark.editing" ng-click="ctrl.edit(bookmark)"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button class="btn btn-success btn-xs" name="save" ng-if="bookmark.editing" ng-click="ctrl.save(bookmark)"><span class="glyphicon glyphicon-ok"></span></button>
+                        <button class="btn btn-danger btn-xs" name="delete" mwl-confirm title="{{'Delete bookmark ' + bookmark.id}}" confirm-text="YES" cancel-text="NO" message="Are you sure?" on-confirm="ctrl.delete(bookmark)" confirm-button-type="danger" cancel-button-type="warning">
                       <span class="glyphicon glyphicon-minus"></span>
                     </button>
                   </div>

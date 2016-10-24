@@ -9,16 +9,24 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
   $stateProvider
     .state('login', {
       url: '/login',
-      template: require('./views/login.html'),
+      template: require('./views/account/login.html'),
       controller: 'LoginController',
       controllerAs: 'ctrl',
       data: {
         requiresLogin: false
       }
     })
+    .state('logout', {
+      url: '/logout',
+      template: '',
+      controller: 'LogoutController',
+      data: {
+        requiresLogin: false
+      }
+    })
     .state('signup', {
       url: '/signup',
-      template: require('./views/signup.html'),
+      template: require('./views/account/signup.html'),
       controller: 'SignUpController',
       controllerAs: 'ctrl',
       data: {
@@ -26,13 +34,11 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
       }
     })
     .state('unauthorized', {
-      url: '/unauthorized',
       template: require('./views/403.html'),
       data: {
         requiresLogin: false
       }
     }).state('not_found', {
-      url: '/not_found',
       template: require('./views/404.html'),
       data: {
         requiresLogin: false
@@ -40,11 +46,11 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
     })
     .state('protected', {
       abstract: true,
-      template: require('./views/home.html'),
+      template: require('./views/protected.html'),
       data: {
         requiresLogin: true
       }
-    }).state('protected.bookmarks', {
+    }).state('protected.bookmark_list', {
       url: "/bookmarks",
       controller: "BookmarkListController",
       controllerAs: "ctrl",
@@ -80,6 +86,18 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
         redirectTo: 'unauthorized'
       }
   }
+}).state('protected.account_info', {
+  url: "/account_info",
+  controller: "UserEditController",
+  controllerAs: "ctrl",
+  template: require('./views/account/info.html'),
+  data: {
+    requiresLogin: true,
+    permissions: {
+      only: ['CLIENT', 'ADMIN'],
+      redirectTo: 'unauthorized'
+    }
+}
 });
 
   $urlRouterProvider.otherwise(function($injector) {
@@ -96,7 +114,7 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
     tokenGetter: ['Auth', function(Auth) {
       return Auth.getToken();
     }],
-    unauthenticatedRedirectPath: '/login',
+    unauthenticatedRedirectPath: '/login'
   });
 
   $httpProvider.interceptors.push('jwtInterceptor');
