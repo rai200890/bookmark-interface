@@ -42,11 +42,7 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
       abstract: true,
       template: require('./views/home.html'),
       data: {
-        requiresLogin: true,
-        permissions: {
-          'only': ['admin', 'client'],
-          'redirectTo': 'unauthorized'
-        }
+        requiresLogin: true
       }
     }).state('protected.bookmarks', {
       url: "/bookmarks",
@@ -56,7 +52,7 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
       data: {
         requiresLogin: true,
         permissions: {
-          only: ['admin', 'client'],
+          only: ['ADMIN', 'CLIENT'],
           redirectTo: 'unauthorized'
         }
       }
@@ -68,7 +64,7 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
       data: {
         requiresLogin: true,
         permissions: {
-          only: 'admin',
+          only: 'ADMIN',
           redirectTo: 'unauthorized'
         }
     }
@@ -80,7 +76,7 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
     data: {
       requiresLogin: true,
       permissions: {
-        only: 'admin',
+        only: 'ADMIN',
         redirectTo: 'unauthorized'
       }
   }

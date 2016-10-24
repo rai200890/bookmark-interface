@@ -1,32 +1,40 @@
 function run(Auth, $state, authManager, PermRoleStore, localStorageService, User, $q) {
 
-  if (!Auth.isTokenValid() && $state.current.name !== 'signup') {
-    $state.go('login');
-  };
+    if (!Auth.isTokenValid() && $state.current.name !== 'signup') {
+        $state.go('login');
+    };
 
-  authManager.checkAuthOnRefresh();
-  authManager.redirectWhenUnauthenticated();
+    authManager.checkAuthOnRefresh();
+    authManager.redirectWhenUnauthenticated();
 
-  PermRoleStore.defineManyRoles({
-    'client': function() {
-      var deferred = $q.defer();
-      Auth.getCurrentUser().then(function(response) {
-        deferred.resolve(response.data.user.role_name === 'client');
-      }).catch(function() {
-        deferred.reject();
-      });
-      return deferred.promise;
-    },
-    'admin': function() {
-      var deferred = $q.defer();
-      Auth.getCurrentUser().then(function(response) {
-        deferred.resolve(response.data.user.role_name === 'admin');
-      }).catch(function() {
-        deferred.reject();
-      });
-      return deferred.promise;
-    }
-  });
+    PermRoleStore.defineManyRoles({
+        'CLIENT': function() {
+            var deferred = $q.defer();
+            Auth.getCurrentUser().then(function(response) {
+                if (response.data.user.role_name === 'client') {
+                    deferred.resolve();
+                } else {
+                    deferred.reject();
+                }
+              }).catch(function() {
+                deferred.reject();
+            });
+            return deferred.promise;
+        },
+        'ADMIN': function() {
+            var deferred = $q.defer();
+            Auth.getCurrentUser().then(function(response) {
+                if (response.data.user.role_name === 'admin') {
+                    deferred.resolve();
+                } else {
+                    deferred.reject();
+                }
+            }).catch(function() {
+                deferred.reject();
+            });
+            return deferred.promise;
+        }
+    });
 
 };
 run.$inject = ['Auth', '$state', 'authManager', 'PermRoleStore', 'localStorageService', 'User', '$q'];

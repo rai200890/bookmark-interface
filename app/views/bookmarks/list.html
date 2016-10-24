@@ -1,54 +1,57 @@
-<div class="row">
-  <h2 class="text-center">Bookmarks</h2>
+<div class="container">
+    <div class="row">
+        <h2 class="text-center">Bookmarks</h2>
+    </div>
+    <div class="row">
+        <bm-alerts bm-items="ctrl.alerts"></bm-alerts>
+    </div>
+    <div class="row" permission permission-only="'CLIENT'">
+        <div ng-include="'views/bookmarks/new.html'"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 xs-hidden">
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <ul uib-pagination total-items="ctrl.pagination.total" items-per-page="ctrl.pagination.per_page" ng-model="ctrl.pagination.page" ng-change="ctrl.loadBookmarks()"></ul>
+        </div>
+        <div class="col-md-4 xs-hidden">
+        </div>
+    </div>
+    <div class="row">
+        <div class="well" ng-hide="ctrl.bookmarks.length > 0">
+            <p class="text-center">No issue created yet</p>
+        </div>
+        <table class="table table-striped table-bordered" ng-show="ctrl.bookmarks.length > 0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>URL</th>
+                    <th permission permission-only="'ADMIN'">User</th>
+                    <th permission permission-only="'CLIENT'">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="bookmark in ctrl.bookmarks">
+                    <td>{{bookmark.id}}</td>
+                    <td>
+                        <input type="text" class="form-control" ng-model="bookmark.title" ng-readonly="!bookmark.editing" />
+                    </td>
+                    <td>
+                        <input type="url" class="form-control" ng-model="bookmark.url" ng-readonly="!bookmark.editing"/>
+                    </td>
+                    <td permission permission-only="'ADMIN'">{{bookmark.user.username}}</td>
+                    <td permission permission-only="'CLIENT'">
+                      <div class="btn-group">
+                        <button class="btn btn-primary" name="edit" ng-if="!bookmark.editing" ng-click="ctrl.edit(bookmark)"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button class="btn btn-success" name="save" ng-if="bookmark.editing" ng-click="ctrl.save(bookmark)"><span class="glyphicon glyphicon-ok"></span></button>
+                        <button class="btn btn-danger" name="delete" mwl-confirm title="{{'Delete bookmark ' + bookmark.id}}" confirm-text="YES" cancel-text="NO" message="Are you sure?" on-confirm="ctrl.delete(bookmark)" confirm-button-type="danger" cancel-button-type="warning">
+                      <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+          </tbody>
+      </table>
 </div>
-<div class="row">
-  <bm-alerts bm-items="ctrl.alerts"></bm-alerts>
-</div>
-<div class="row">
-  <div ng-include="'views/bookmarks/new.html'">
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-4 xs-hidden">
-  </div>
-  <div class="col-md-4 col-xs-12">
-    <ul uib-pagination total-items="ctrl.pagination.total" items-per-page="ctrl.pagination.per_page" ng-model="ctrl.pagination.page" ng-change="ctrl.loadBookmarks()"></ul>
-  </div>
-  <div class="col-md-4 xs-hidden">
-  </div>
-</div>
-<div class="row">
-  <div class="well" ng-hide="ctrl.bookmarks.length > 0">
-    <p class="text-center">No issue created yet</p>
-  </div>
-  <table class="table table-striped table-bordered" ng-show="ctrl.bookmarks.length > 0">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>URL</th>
-        <th>User</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="bookmark in ctrl.bookmarks">
-        <td>{{bookmark.id}}</td>
-        <td>
-          <input type="text" class="form-control" ng-model="bookmark.title" ng-disabled="!bookmark.editing" />
-        </td>
-        <td>
-          <input type="url" class="form-control" ng-model="bookmark.url" ng-disabled="!bookmark.editing" />
-        </td>
-        <td>{{bookmark.user.username}}</td>
-        <td>
-          <button class="btn btn-primary btn-sm" name="edit" ng-show="!bookmark.editing" ng-click="ctrl.edit(bookmark)"><span class="glyphicon glyphicon-pencil"></span></button>
-          <button class="btn btn-success btn-sm" name="save" ng-show="bookmark.editing" ng-click="ctrl.save(bookmark)"><span class="glyphicon glyphicon-ok"></span></button>
-          <button class="btn btn-danger btn-sm" mwl-confirm title="{{'Delete bookmark ' + bookmark.id}}" confirm-text="YES" cancel-text="NO" message="Are you sure?" on-confirm="ctrl.delete(bookmark)" confirm-button-type="danger" cancel-button-type="warning">
-            <span class="glyphicon glyphicon-minus"></span>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 </div>
