@@ -26,13 +26,11 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
       }
     })
     .state('unauthorized', {
-      url: '/unauthorized',
       template: require('./views/403.html'),
       data: {
         requiresLogin: false
       }
     }).state('not_found', {
-      url: '/not_found',
       template: require('./views/404.html'),
       data: {
         requiresLogin: false
@@ -96,7 +94,7 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
     tokenGetter: ['Auth', function(Auth) {
       return Auth.getToken();
     }],
-    unauthenticatedRedirectPath: '/login',
+    unauthenticatedRedirectPath: '/login'
   });
 
   $httpProvider.interceptors.push('jwtInterceptor');
