@@ -2,12 +2,14 @@ describe("LoginController", function() {
   var controller = null,
     Auth = null,
     state = null,
-    httpBackend = null;
+    httpBackend = null,
+    PermRoleStore = null;
   beforeEach(angular.mock.module('app'));
   describe("#login", function() {
-    beforeEach(angular.mock.inject(function($controller, Auth, $state, $httpBackend) {
+    beforeEach(angular.mock.inject(function($controller, Auth, $state, $httpBackend, _PermRoleStore_) {
       httpBackend = $httpBackend;
       state = $state;
+      PermRoleStore = _PermRoleStore_;
       controller = $controller('LoginController', {
         'Auth': Auth,
         '$state': state
@@ -18,7 +20,14 @@ describe("LoginController", function() {
         httpBackend.when('POST', 'http://localhost:5000/auth').respond(200, {
           'access_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGl0eSI6MSwiaWF0IjoxNDQ0OTE3NjQwLCJuYmYiOjE0NDQ5MTc2NDAsImV4cCI6MTQ0NDkxNzk0MH0.KPmI6WSjRjlpzecPvs3q_T3cJQvAgJvaQAPtk1abC_E'
         });
-        spyOn(state, "go");
+        httpBackend.when('GET',  'http://localhost:5000/users/1').respond(200, {
+          'user': {
+            "id": 1,
+            "name": "client",
+            "role_name": "client"
+          }
+        });
+        spyOn(state, "go").and.callThrough();
       });
       it("should go to bookmark list state", function() {
         var credentials = {

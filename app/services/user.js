@@ -1,5 +1,5 @@
 function User($http, API_URL) {
-  this.index = function(page, per_page) {
+  this.index = function() {
     return $http.get(API_URL + "/users");
   };
 

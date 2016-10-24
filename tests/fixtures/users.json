@@ -1,0 +1,10 @@
+{
+  "users": [
+    {
+      "role_id": 2,
+      "id": 5,
+      "email": "client@mail.com",
+      "username": "client"
+    }
+  ]
+}
