@@ -100,6 +100,9 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
 }
 });
 
+
+  $urlRouterProvider.when('/', '/bookmarks');
+
   $urlRouterProvider.otherwise(function($injector) {
     var $state = $injector.get("$state");
     $state.go('not_found');

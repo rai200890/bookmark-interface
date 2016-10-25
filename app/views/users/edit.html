@@ -38,7 +38,7 @@
                             <input ng-model="ctrl.passwordConfirmation" ng-required="ctrl.passwordToBeChanged" name="confirm_password" type="password" class="form-control" placeholder="Confirm Password">
                         </div>
                     </div>
-                    <button ui-sref="protected.user_list" class="btn btn-default" permission permission-only="'AD'">Back</button>
+                    <button ui-sref="protected.user_list" class="btn btn-default" permission permission-only="'ADMIN'">Back</button>
                     <button ng-click="ctrl.save()" ng-disabled="edit.$invalid || ctrl.passwordConfirmation != ctrl.user.password" type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>
