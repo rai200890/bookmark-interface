@@ -8,7 +8,7 @@ var APP = __dirname + '/app';
 module.exports = {
     context: APP,
     entry: {
-        app: ['webpack/hot/dev-server', './app.module.js', './app.css']
+        app: ['./app.module.js', './app.css']
     },
     plugins: [
         new webpack.ProvidePlugin({
@@ -27,7 +27,8 @@ module.exports = {
     output: {
         path: APP,
         filename: '[name].js',
-        path: __dirname + '/dist'
+        path: __dirname + '/dist',
+        exclude: __dirname + '/app/index.html'
     },
     module: {
         loaders: [{

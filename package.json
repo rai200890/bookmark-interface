@@ -11,9 +11,10 @@
     "start": "./node_modules/.bin/webpack-dev-server --content-base app --hot --history-api-fallback"
   },
   "engines": {
-	"node": "6.6.0",
-	"npm": "3.10.3"
-  },"repository": {
+    "node": "6.6.0",
+    "npm": "3.10.3"
+  },
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/rai200890/bookmark-interface.git"
   },
