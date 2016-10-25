@@ -7,12 +7,12 @@
     "test": "./node_modules/.bin/karma start",
     "build": "./node_modules/.bin/webpack -b",
     "build:production": "./node_modules/.bin/webpack -b --config webpack.production.config.js",
-    "heroku-postbuild": "webpack -b --config webpack.production.config.js",
+    "postinstall": "webpack -p --config ./webpack.production.config.js --progress",
     "start": "./node_modules/.bin/webpack-dev-server --content-base app --hot --history-api-fallback"
   },
   "engines": {
-	"node": "6.x",
-	"npm": "3.x"
+	"node": "6.6.0",
+	"npm": "3.10.3"
   },"repository": {
     "type": "git",
     "url": "git+https://github.com/rai200890/bookmark-interface.git"
