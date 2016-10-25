@@ -1,4 +1,10 @@
-function run(Auth, $state, authManager, PermRoleStore, localStorageService, User, $q) {
+function run(Auth, $state, authManager, PermRoleStore, localStorageService, User, $q, $templateCache) {
+    //Add templates to template cache
+    var req = require.context('./', true, /\.html$/);
+    req.keys().forEach(function(key) {
+        var content = req(key);
+        $templateCache.put(key, content);
+    });
 
     if (!Auth.isTokenValid() && $state.current.name !== 'signup') {
         $state.go('login');
@@ -16,7 +22,7 @@ function run(Auth, $state, authManager, PermRoleStore, localStorageService, User
                 } else {
                     deferred.reject();
                 }
-              }).catch(function() {
+            }).catch(function() {
                 deferred.reject();
             });
             return deferred.promise;
@@ -38,5 +44,5 @@ function run(Auth, $state, authManager, PermRoleStore, localStorageService, User
 
 }
 
-run.$inject = ['Auth', '$state', 'authManager', 'PermRoleStore', 'localStorageService', 'User', '$q'];
+run.$inject = ['Auth', '$state', 'authManager', 'PermRoleStore', 'localStorageService', 'User', '$q', '$templateCache'];
 module.exports = run;

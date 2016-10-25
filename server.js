@@ -5,7 +5,7 @@ var express = require('express'),
 app.use('/', express.static(path.join(__dirname, '/dist')));
 
 app.get('*', function(req, res){
-  res.sendfile(__dirname + '/app/index.html');
+  res.sendFile(__dirname + '/app/index.html');
 });
 
 app.listen(process.env.PORT || 3000);
