@@ -1,9 +1,5 @@
 function Auth($http, API_URL, localStorageService, jwtHelper, PermRoleStore, User, $q) {
     var self = this;
-    var deferred = $q.defer();
-    var currentUser = null;
-    var cachedUser = null;
-
     self.login = function(credentials, saveCredentials) {
         var url = API_URL + "/auth";
         var deferred = $q.defer();
@@ -14,12 +10,16 @@ function Auth($http, API_URL, localStorageService, jwtHelper, PermRoleStore, Use
                 "data": credentials
             })
             .then(function(response) {
-                var token = response.data.access_token,
-                    decodedToken = jwtHelper.decodeToken(token),
-                    userId = decodedToken['identity'];
-                localStorageService.set('access_token', token);
-                localStorageService.set('user_id', userId);
-                deferred.resolve(response);
+                var token = response.data.access_token;
+                if (token) {
+                    localStorageService.set('access_token', token);
+                    deferred.resolve(response);
+                } else {
+                    localStorageService.remove('access_token');
+                    deferred.reject({
+                        'errors': ['Token not found']
+                    });
+                }
             }).catch(function(response) {
                 deferred.reject(response);
             });
@@ -28,18 +28,21 @@ function Auth($http, API_URL, localStorageService, jwtHelper, PermRoleStore, Use
 
     self.logout = function() {
         localStorageService.remove('access_token');
-        localStorageService.remove('user_id');
     };
 
     self.getCurrentUser = function() {
-        var userId = self.getUserId();
-        var deferred = $q.defer();
-        if (userId === null) {
-            deferred.reject();
-            return deferred.promise;
+        var deferred = $q.defer(),
+            userId = self.getUserId();
+        if (userId) {
+            User.show(userId).then(function(response) {
+                deferred.resolve(response);
+            }).catch(function(response) {
+                deferred.reject(response);
+            });
         } else {
-            return User.show(userId);
+            deferred.reject();
         }
+        return deferred.promise;
     };
 
     self.getToken = function() {
@@ -47,7 +50,9 @@ function Auth($http, API_URL, localStorageService, jwtHelper, PermRoleStore, Use
     };
 
     self.getUserId = function() {
-        return localStorageService.get('user_id', null);
+        var token = self.getToken(),
+            decodedToken = (token) ? jwtHelper.decodeToken(token): {};
+        return decodedToken['identity'];
     };
 
     self.isTokenValid = function() {

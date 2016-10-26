@@ -15,7 +15,7 @@ function run(Auth, $state, authManager, PermRoleStore, localStorageService, User
 
     var currentUser = Auth.getCurrentUser();
 
-    currentUser.then(function() {
+    currentUser.finally(function() {
         $urlRouter.sync();
         $urlRouter.listen();
     });
@@ -36,10 +36,10 @@ function run(Auth, $state, authManager, PermRoleStore, localStorageService, User
 
     PermRoleStore.defineManyRoles({
         'CLIENT': function() {
-          return hasRole(currentUser, 'client');
+            return hasRole(currentUser, 'client');
         },
         'ADMIN': function() {
-          return hasRole(currentUser, 'admin');
+            return hasRole(currentUser, 'admin');
         }
     });
 
