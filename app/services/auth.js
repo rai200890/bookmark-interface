@@ -1,7 +1,7 @@
 function Auth($http, API_URL, localStorageService, jwtHelper, PermRoleStore, User, $q) {
   var self = this;
   var deferred = $q.defer();
-  var promise = null;
+  var currentUser = null;
   var cachedUser = null;
 
   self.login = function(credentials, saveCredentials) {
@@ -18,6 +18,10 @@ function Auth($http, API_URL, localStorageService, jwtHelper, PermRoleStore, Use
           userId = decodedToken['identity'];
         localStorageService.set('access_token', token);
         localStorageService.set('user_id', userId);
+      })
+      .error(function(){
+        localStorageService.remove('access_token');
+        localStorageService.remove('user_id');      
       });
   };
 
@@ -27,7 +31,15 @@ function Auth($http, API_URL, localStorageService, jwtHelper, PermRoleStore, Use
   };
 
   self.getCurrentUser = function() {
-      return User.show(self.getUserId());
+      var userId = self.getUserId();
+      var deferred = $q.defer();
+
+      if (userId !== null){
+        return User.show(userId);
+      }else{
+        deferred.reject();
+        return deferred.promise;
+      }
   }
 
   self.getToken = function() {
@@ -35,7 +47,7 @@ function Auth($http, API_URL, localStorageService, jwtHelper, PermRoleStore, Use
   };
 
   self.getUserId = function(){
-    return localStorageService.get('user_id');
+    return localStorageService.get('user_id', null);
   };
 
   self.isTokenValid = function() {

@@ -44,6 +44,7 @@ describe("LoginController", function() {
         httpBackend.when('POST', 'http://localhost:5000/auth').respond(401, {
           'errors': ['Invalid credentials']
         });
+        httpBackend.when('GET',  'http://localhost:5000/users/1').respond(401, {});
       });
       it("should display error message and not change state", function() {
         var credentials = {

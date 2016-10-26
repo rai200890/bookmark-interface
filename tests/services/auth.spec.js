@@ -45,7 +45,7 @@ describe("Auth", function() {
     describe("#getCurrentUser", function() {
         beforeEach(function() {
             spyOn(User, 'show').and.callThrough();
-            spyOn(service, 'getUserId').and.callThrough();
+            spyOn(service, 'getUserId').and.returnValue(1);
         });
         it("should fetch current user details", function() {
             service.getCurrentUser();
@@ -63,7 +63,7 @@ describe("Auth", function() {
         it("should return user id from session storage", function() {
             spyOn(localStorageService, 'get');
             service.getUserId();
-            expect(localStorageService.get).toHaveBeenCalledWith('user_id');
+            expect(localStorageService.get).toHaveBeenCalledWith('user_id', null);
         });
     });
     describe('#isTokenValid', function() {
