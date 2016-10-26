@@ -4,12 +4,13 @@ function LoginController(Auth, $state) {
     ctrl.alerts = [];
 
     ctrl.login = function() {
-        Auth.login(ctrl.credentials).success(function(response) {
+        Auth.login(ctrl.credentials).then(function(response) {
             $state.go('protected.bookmark_list');
-        }).error(function(response, statusCode) {
+
+        }).catch(function(response, statusCode) {
             ctrl.alerts.push({
               type: "danger",
-              messages: response.errors
+              messages: response.data.errors
             });
         });
     };
