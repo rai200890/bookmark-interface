@@ -26,8 +26,8 @@ function NavigationController(Auth, $state) {
     }];
 
     ctrl.init = function(){
-      Auth.getCurrentUser().success(function(response) {
-          ctrl.currentUser = response.user;
+      Auth.getCurrentUser().then(function(response) {
+          ctrl.currentUser = response.data.user;
       });
     };
 
