@@ -44,7 +44,7 @@ describe("Auth", function() {
     });
     describe("#getCurrentUser", function() {
         beforeEach(function() {
-            spyOn(User, 'show').and.callThrough();
+            spyOn(User, 'show');
             spyOn(service, 'getUserId').and.returnValue(1);
         });
         it("should fetch current user details", function() {
