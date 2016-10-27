@@ -1,3 +1,5 @@
 <div uib-alert ng-repeat="item in bmItems" ng-class="'alert-' + item.type" close="close($index)">
-  <p ng-repeat="message in item.messages">{{message}}</p>
+    <div class="row">
+        <p ng-repeat="message in item.messages" class="text-center">{{message}}</p>
+    </div>
 </div>
