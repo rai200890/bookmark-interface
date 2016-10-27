@@ -1,23 +1,23 @@
-function LoginController(Auth, $state, $scope, localStorageService) {
+function LoginController(Auth, $state, localStorageService) {
     var ctrl = this;
-    var unbind = localStorageService.bind($scope, 'access_token');
-
     ctrl.credentials = {};
     ctrl.alerts = [];
+    ctrl.loading = false;
 
     ctrl.login = function() {
+        ctrl.loading = true;
         Auth.login(ctrl.credentials).then(function(response) {
-            $scope.$on('LocalStorageModule.notification.setitem', function(event, value) {
-                $state.go('protected.bookmark_list');
-            });
+            $state.go('protected.bookmark_list');
         }).catch(function(response, statusCode) {
             ctrl.alerts.push({
                 type: "danger",
                 messages: response.data.errors
             });
+        }).finally(function() {
+            ctrl.loading = false;
         });
     };
 }
-LoginController.$inject = ['Auth', '$state', '$scope', 'localStorageService'];
+LoginController.$inject = ['Auth', '$state', 'localStorageService'];
 
 module.exports = LoginController

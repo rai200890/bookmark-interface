@@ -1,14 +1,10 @@
-function run(Auth, $state, authManager, PermRoleStore, localStorageService, User, $q, $templateCache, $urlRouter) {
+function run(Auth, $state, authManager, PermRoleStore, localStorageService, User, $q, $templateCache, $urlRouter, $rootScope) {
     //Add templates to template cache
     var req = require.context('./', true, /\.html$/);
     req.keys().forEach(function(key) {
         var content = req(key);
         $templateCache.put(key, content);
     });
-
-    if (!Auth.isTokenValid() && $state.current.name !== 'signup') {
-        $state.go('login');
-    }
 
     authManager.checkAuthOnRefresh();
     authManager.redirectWhenUnauthenticated();
@@ -28,22 +24,28 @@ function run(Auth, $state, authManager, PermRoleStore, localStorageService, User
             } else {
                 deferred.reject();
             }
-        }).catch(function() {
+        }).catch(function(response, statusCode) {
             deferred.reject();
         });
         return deferred.promise;
     };
 
+    $rootScope.$on('LocalStorageModule.notification.setitem', function(event, value){
+      if (value.key === 'access_token'){
+        currentUser = Auth.getCurrentUser();        
+      }
+    });
+
     PermRoleStore.defineManyRoles({
-        'CLIENT': function() {
+        'CLIENT': function(role_name, transitionProperties) {
             return hasRole(currentUser, 'client');
         },
-        'ADMIN': function() {
-            return hasRole(currentUser, 'admin');
+        'ADMIN': function(role_name, transitionProperties) {
+          return hasRole(currentUser, 'admin');
         }
     });
 
 }
-run.$inject = ['Auth', '$state', 'authManager', 'PermRoleStore', 'localStorageService', 'User', '$q', '$templateCache', '$urlRouter'];
+run.$inject = ['Auth', '$state', 'authManager', 'PermRoleStore', 'localStorageService', 'User', '$q', '$templateCache', '$urlRouter', '$rootScope'];
 
 module.exports = run;

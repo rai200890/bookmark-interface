@@ -18,7 +18,7 @@ describe("Auth", function() {
                 httpBackend.expectPOST('http://localhost:5000/auth').respond(200, {
                     'access_token': token
                 });
-                spyOn(localStorageService, 'set').and.callThrough();
+                spyOn(localStorageService, 'set');
             });
             it("should store access token in session storage", function() {
                 var credentials = {
@@ -52,16 +52,15 @@ describe("Auth", function() {
     });
     describe('#getToken', function() {
         it("should return token from session storage", function() {
-            spyOn(localStorageService, 'get');
+            spyOn(localStorageService, 'get').and.returnValue(token);
             service.getToken();
             expect(localStorageService.get).toHaveBeenCalledWith('access_token', null);
         });
     });
     describe('#getUserId', function() {
-        xit("should return user id from session storage", function() {
-            spyOn(localStorageService, 'get').and.callThrough();
-            service.getUserId();
-            expect(localStorageService.get).toBeCalledWith('access_token', null);
+        it("should return user id from session storage", function() {
+            spyOn(localStorageService, 'get').and.returnValue(token);
+            expect(service.getUserId()).toEqual(1);
         });
     });
     describe('#isTokenValid', function() {

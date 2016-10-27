@@ -35,7 +35,7 @@ describe("LoginController", function() {
         });
         spyOn(state, "go").and.callThrough();
       });
-      xit("should go to bookmark list state", function() {
+      it("should go to bookmark list state", function() {
         var credentials = {
           "username": "user",
           "password": "pass"
