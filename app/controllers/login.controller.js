@@ -9,10 +9,10 @@ function LoginController(Auth, $state, localStorageService) {
         Auth.login(ctrl.credentials).then(function(response) {
             $state.go('protected.bookmark_list');
         }).catch(function(response, statusCode) {
-            ctrl.alerts.push({
+            ctrl.alerts = [{
                 type: "danger",
                 messages: response.data.errors
-            });
+            }];
         }).finally(function() {
             ctrl.loading = false;
         });
