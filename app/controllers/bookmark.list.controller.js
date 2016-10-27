@@ -7,25 +7,7 @@ function BookmarkListController(Bookmark) {
         page: 1
     };
 
-    ctrl.newBookmark = {};
     ctrl.alerts = [];
-
-    ctrl.create = function() {
-        Bookmark.create(ctrl.newBookmark)
-            .success(function(response) {
-                ctrl.alerts = [{
-                    "type": "success",
-                    "messages": ["Bookmark successfully created!"]
-                }];
-                ctrl.loadBookmarks();
-            })
-            .error(function(response) {
-                ctrl.alerts = [{
-                    "type": "danger",
-                    "messages": response.errors
-                }];
-            });
-    };
 
     ctrl.edit = function(bookmark) {
         bookmark.editing = true;

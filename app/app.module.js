@@ -14,6 +14,7 @@ var navigationController = require('./controllers/navigation.controller'),
     loginController = require('./controllers/login.controller'),
     logoutController = require('./controllers/logout.controller'),
     signUpController = require('./controllers/signup.controller'),
+    bookmarkNewController = require('./controllers/bookmark.new.controller'),
     bookmarkListController = require('./controllers/bookmark.list.controller'),
     userEditController = require('./controllers/user.edit.controller'),
     userListController = require('./controllers/user.list.controller');
@@ -41,6 +42,7 @@ var app = angular.module(MODULE_NAME, [uirouter, ('ct.ui.router.extras.core'),
   .controller('LoginController', loginController)
   .controller('LogoutController', logoutController)
   .controller('SignUpController', signUpController)
+  .controller('BookmarkNewController', bookmarkNewController)
   .controller('BookmarkListController', bookmarkListController)
   .controller('UserListController', userListController)
   .controller('UserEditController', userEditController)

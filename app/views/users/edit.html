@@ -1,53 +1,55 @@
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3 class="panel-title">Edit User</h3>
-    </div>
-    <div class="panel-body">
-        <div class="container-fluid">
-            <div class="row">
-                <bm-alerts bm-items="ctrl.alerts"></bm-alerts>
-            </div>
-            <div class="row">
-                <form name="edit" class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-md-2 control-label" for="username">Username</label>
-                        <div class="col-md-6">
-                            <input ng-model="ctrl.user.username" ng-required="true" name="username" type="text" ng-disabled="true" class="form-control" placeholder="Username">
+<div class="row">
+    <bm-alerts bm-items="ctrl.alerts"></bm-alerts>
+</div>
+<div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Edit User</h3>
+        </div>
+        <div class="panel-body">
+            <div class="container">
+                <div class="row">
+                    <form name="edit" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="username">Username</label>
+                            <div class="col-md-6">
+                                <input ng-model="ctrl.user.username" ng-required="true" name="username" type="text" ng-disabled="true" class="form-control" placeholder="Username">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label" for="email">Email</label>
-                        <div class="col-md-6">
-                            <input ng-model="ctrl.user.email" ng-required="true" name="email" type="text" class="form-control" placeholder="user@mail.com">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="email">Email</label>
+                            <div class="col-md-6">
+                                <input ng-model="ctrl.user.email" ng-required="true" name="email" type="text" class="form-control" placeholder="user@mail.com">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-2 control-label" for="email">Role</label>
-                        <div class="col-md-6">
-                            <select name="role" class="form-control" ng-options="option.name for option in ctrl.roles.availableOptions track by option.id" ng-model="ctrl.roles.selectedOption">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="email">Role</label>
+                            <div class="col-md-6">
+                                <select name="role" class="form-control" ng-options="option.name for option in ctrl.roles.availableOptions track by option.id" ng-model="ctrl.roles.selectedOption">
                         </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group" ng-hide="ctrl.passwordToBeChanged">
-                        <div class="col-md-10">
-                            <button ng-click="ctrl.changePassword()" class="btn btn-sm btn-danger">Change Password <span class="caret"></span></button>
+                        <div class="form-group" ng-hide="ctrl.passwordToBeChanged">
+                            <div class="col-md-10">
+                                <button ng-click="ctrl.changePassword()" class="btn btn-sm btn-danger">Change Password <span class="caret"></span></button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group" ng-show="ctrl.passwordToBeChanged">
-                        <label class="col-md-2 control-label" for="password">Password</label>
-                        <div class="col-md-6">
-                            <input ng-model="ctrl.user.password" ng-required="ctrl.passwordToBeChanged" name="password" type="password" class="form-control" placeholder="Password">
+                        <div class="form-group" ng-show="ctrl.passwordToBeChanged">
+                            <label class="col-md-2 control-label" for="password">Password</label>
+                            <div class="col-md-6">
+                                <input ng-model="ctrl.user.password" ng-required="ctrl.passwordToBeChanged" name="password" type="password" class="form-control" placeholder="Password">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group" ng-show="ctrl.passwordToBeChanged">
-                        <label class="col-md-2 control-label" for="password">Confirm Password</label>
-                        <div class="col-md-6">
-                            <input ng-model="ctrl.passwordConfirmation" ng-required="ctrl.passwordToBeChanged" name="confirm_password" type="password" class="form-control" placeholder="Confirm Password">
+                        <div class="form-group" ng-show="ctrl.passwordToBeChanged">
+                            <label class="col-md-2 control-label" for="password">Confirm Password</label>
+                            <div class="col-md-6">
+                                <input ng-model="ctrl.passwordConfirmation" ng-required="ctrl.passwordToBeChanged" name="confirm_password" type="password" class="form-control" placeholder="Confirm Password">
+                            </div>
                         </div>
-                    </div>
-                    <button ui-sref="protected.user_list" class="btn btn-default" permission permission-only="'ADMIN'">Back</button>
-                    <button ng-click="ctrl.save()" ng-disabled="edit.$invalid || ctrl.passwordConfirmation != ctrl.user.password" type="submit" class="btn btn-primary">Save</button>
-                </form>
+                        <button ui-sref="protected.user_list" class="btn btn-default" permission permission-only="'ADMIN'">Back</button>
+                        <button ng-click="ctrl.save()" ng-disabled="edit.$invalid || ctrl.passwordConfirmation != ctrl.user.password" type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
