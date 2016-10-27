@@ -1,30 +1,30 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-3 xs-hidden">
-        </div>
-        <div class="col-md-6 col-xs-12">
-            <div class="row">
-                <h1 class="text-center">Login</h1>
+        <bm-alerts bm-items="ctrl.alerts"></bm-alerts>
+    </div>
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Login</h3>
             </div>
-            <div class="row">
-                <bm-alerts bm-items="ctrl.alerts"></bm-alerts>
-            </div>
-            <div class="row">
-                <form novalidate name="login">
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input ng-model="ctrl.credentials.username" ng-required="true" name="username" type="text" class="form-control" placeholder="Username">
+            <div class="panel-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <form novalidate name="login">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input ng-model="ctrl.credentials.username" ng-required="true" name="username" type="text" class="form-control" placeholder="Username">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input ng-model="ctrl.credentials.password" ng-required="true" name="password" type="password" class="form-control" placeholder="Password">
+                            </div>
+                            <button ng-click="ctrl.login()" ng-disabled="ctrl.loading" type="submit" class="btn btn-primary">Login <span ng-show="ctrl.loading" class="glyphicon glyphicon-repeat fast-right-spinner"></span></button>
+                            <button ui-sref="signup" class="btn btn-success">Sign-Up</button>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input ng-model="ctrl.credentials.password" ng-required="true" name="password" type="password" class="form-control" placeholder="Password">
-                    </div>
-                    <button ng-click="ctrl.login()" ng-disabled="ctrl.loading" type="submit" class="btn btn-primary">Login <span ng-show="ctrl.loading" class="glyphicon glyphicon-repeat fast-right-spinner"></span></button>
-                    <button ui-sref="signup" class="btn btn-success">Sign-Up</button>
-                </form>
+                </div>
             </div>
-        </div>
-        <div class="col-md-3 xs-hidden">
         </div>
     </div>
 </div>

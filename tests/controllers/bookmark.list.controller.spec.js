@@ -33,53 +33,6 @@ describe("BookmarkListController", function() {
             expect(controller.loadBookmarks).toHaveBeenCalled();
         });
     });
-    describe("#create", function() {
-        describe("with valid params", function() {
-            beforeEach(function() {
-                httpBackend.when("POST", 'http://localhost:5000/bookmarks').respond(200, {
-                    "bookmark": {
-                        "id": 31,
-                        "title": "Google",
-                        "url": "http://google.com.br"
-                    }
-                });
-                httpBackend.when("GET", 'http://localhost:5000/bookmarks?page=1&per_page=10').respond(200, require("raw!../fixtures/bookmarks.json"));
-                spyOn(controller, 'loadBookmarks').and.callThrough();
-            });
-            it("should reload bookmarks and display success message", function() {
-                controller.newBookmark = {
-                    "title": "Google",
-                    "url": "http://google.com.br"
-                };
-                controller.create();
-                httpBackend.flush();
-                expect(controller.alerts).toEqual([{
-                    "type": "success",
-                    "messages": ["Bookmark successfully created!"]
-                }]);
-                expect(controller.loadBookmarks).toHaveBeenCalled();
-            });
-        });
-        describe("with invalid params", function() {
-            beforeEach(function() {
-                httpBackend.when("POST", 'http://localhost:5000/bookmarks').respond(422, {
-                    "errors": ["Duplicate key"]
-                });
-            });
-            it("should display error messages", function() {
-                controller.newBookmark = {
-                    "title": "Google",
-                    "url": "http://google.com"
-                };
-                controller.create();
-                httpBackend.flush();
-                expect(controller.alerts).toEqual([{
-                    "type": "danger",
-                    "messages": ["Duplicate key"]
-                }]);
-            });
-        });
-    });
     describe("#edit", function() {
         it("set editing attribute to true", function() {
             var bookmark = {

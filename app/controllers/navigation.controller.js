@@ -14,21 +14,27 @@ function NavigationController(Auth, $state) {
     }];
 
     ctrl.account_menu = [{
-      name: "Account Info",
-      link: ".account_info"
-    },{
-            name: "divider",
-            link: "#"
+        name: "Account Info",
+        link: ".account_info"
+    }, {
+        name: "divider",
+        link: "#"
 
-    },{
+    }, {
         name: "Logout",
         link: "logout"
     }];
 
-    ctrl.init = function(){
-      Auth.getCurrentUser().then(function(response) {
-          ctrl.currentUser = response.data.user;
-      });
+    ctrl.init = function() {
+        Auth.getCurrentUser().then(function(response) {
+            ctrl.currentUser = response.data.user;
+            if (ctrl.currentUser.role_name === 'client') {
+                ctrl.bookmarks_menu.push({
+                    name: "New Bookmark",
+                    link: ".bookmark_new"
+                });
+            }
+        });
     };
 
     ctrl.init();

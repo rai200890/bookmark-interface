@@ -64,6 +64,18 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
                     redirectTo: 'unauthorized'
                 }
             }
+        }).state('protected.bookmark_new', {
+            url: "/bookmarks/new",
+            controller: "BookmarkNewController",
+            controllerAs: "ctrl",
+            template: require('./views/bookmarks/new.html'),
+            data: {
+                requiresLogin: true,
+                permissions: {
+                    only: 'CLIENT',
+                    redirectTo: 'unauthorized'
+                }
+            }
         }).state('protected.user_list', {
             url: "/users",
             controller: "UserListController",

@@ -7,25 +7,7 @@ function BookmarkListController(Bookmark) {
         page: 1
     };
 
-    ctrl.newBookmark = {};
     ctrl.alerts = [];
-
-    ctrl.create = function() {
-        Bookmark.create(ctrl.newBookmark)
-            .success(function(response) {
-                ctrl.alerts.push({
-                    "type": "success",
-                    "messages": ["Bookmark successfully created!"]
-                });
-                ctrl.loadBookmarks();
-            })
-            .error(function(response) {
-                ctrl.alerts.push({
-                    "type": "danger",
-                    "messages": response.errors
-                });
-            });
-    };
 
     ctrl.edit = function(bookmark) {
         bookmark.editing = true;
@@ -34,34 +16,34 @@ function BookmarkListController(Bookmark) {
     ctrl.save = function(bookmark) {
         Bookmark.update(bookmark.id, bookmark)
             .success(function() {
-                ctrl.alerts.push({
+                ctrl.alerts = [{
                     "type": "success",
                     "messages": ["Bookmark " + bookmark.id + " successfully updated!"]
-                });
+                }];
                 bookmark.editing = false;
             })
             .error(function(response) {
-                ctrl.alerts.push({
+                ctrl.alerts = [{
                     "type": "danger",
                     "messages": response.errors
-                });
+                }];
             });
     };
 
     ctrl.delete = function(bookmark) {
         Bookmark.delete(bookmark.id)
             .success(function() {
-                ctrl.alerts.push({
+                ctrl.alerts = [{
                     "type": "success",
                     "messages": ["Bookmark " + bookmark.id + " successfully deleted!"]
-                });
+                }];
                 ctrl.loadBookmarks();
             })
             .error(function(response) {
-                ctrl.alerts.push({
+                ctrl.alerts = [{
                     "type": "danger",
                     "messages": response.errors
-                });
+                }];
             });
     };
 
@@ -73,9 +55,9 @@ function BookmarkListController(Bookmark) {
             });
     };
 
-    ctrl.init = function(){
+    ctrl.init = function() {
         ctrl.loadBookmarks();
-    }
+    };
 
     ctrl.init();
 }
