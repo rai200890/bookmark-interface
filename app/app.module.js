@@ -22,7 +22,8 @@ var bmAlerts = require("./directives/bmAlerts");
 
 var auth = require('./services/auth'),
     bookmark = require('./services/bookmark'),
-    user = require('./services/user');
+    user = require('./services/user'),
+    role = require('./services/role');
 
 
 var MODULE_NAME = 'app',
@@ -47,6 +48,7 @@ var app = angular.module(MODULE_NAME, [uirouter, ('ct.ui.router.extras.core'),
   .service('Auth', auth)
   .service('Bookmark', bookmark)
   .service('User', user)
+  .service('Role', role)
   .constant('API_URL', API_URL)
   .constant('WHITELISTED_DOMAINS', WHITELISTED_DOMAINS)
   .config(config).run(run);

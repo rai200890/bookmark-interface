@@ -1,13 +1,16 @@
 describe("UserEditController", function() {
     var controller = null,
         User = null,
+        Role = null,
         httpBackend = null;
     beforeEach(angular.mock.module('app'));
-    beforeEach(angular.mock.inject(function($controller, _User_, $httpBackend) {
+    beforeEach(angular.mock.inject(function($controller, _User_, _Role_, $httpBackend) {
         httpBackend = $httpBackend;
         User = _User_;
+        Role = _Role_;
         controller = $controller('UserEditController', {
             'User': User,
+            'Role': Role,
             '$stateParams': {
                 'id': 1
             }
@@ -21,6 +24,7 @@ describe("UserEditController", function() {
                 "email": "user@email.com"
             }
         });
+        httpBackend.when('GET', 'http://localhost:5000/roles').respond(200, require('raw!../fixtures/roles.json'));
         httpBackend.flush();
     });
     afterEach(function() {

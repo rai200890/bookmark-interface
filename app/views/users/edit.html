@@ -21,6 +21,13 @@
                             <input ng-model="ctrl.user.email" ng-required="true" name="email" type="text" class="form-control" placeholder="user@mail.com">
                         </div>
                     </div>
+                    <div class="form-group">
+                      <label class="col-md-2 control-label" for="email">Role</label>
+                        <div class="col-md-6">
+                            <select name="role" class="form-control" ng-options="option.name for option in ctrl.roles.availableOptions track by option.id" ng-model="ctrl.roles.selectedOption">
+                        </select>
+                        </div>
+                    </div>
                     <div class="form-group" ng-hide="ctrl.passwordToBeChanged">
                         <div class="col-md-10">
                             <button ng-click="ctrl.changePassword()" class="btn btn-sm btn-danger">Change Password <span class="caret"></span></button>
