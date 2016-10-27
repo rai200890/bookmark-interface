@@ -111,8 +111,8 @@ function config($stateProvider, $locationProvider, $urlRouterProvider, localStor
 
     localStorageServiceProvider
         .setPrefix('bookmarkApp')
-        .setStorageType('sessionStorage');
-
+        .setNotify(true, true)
+        .setDefaultToCookie(false);
     jwtOptionsProvider.config({
         whiteListedDomains: WHITELISTED_DOMAINS,
         tokenGetter: ['Auth', function(Auth) {

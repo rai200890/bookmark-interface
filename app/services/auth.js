@@ -1,4 +1,4 @@
-function Auth($http, API_URL, localStorageService, jwtHelper, PermRoleStore, User, $q) {
+function Auth($http, API_URL, localStorageService, jwtHelper, User, $q) {
     var self = this;
     self.login = function(credentials, saveCredentials) {
         var url = API_URL + "/auth";
@@ -15,9 +15,10 @@ function Auth($http, API_URL, localStorageService, jwtHelper, PermRoleStore, Use
                     localStorageService.set('access_token', token);
                     deferred.resolve(response);
                 } else {
-                    localStorageService.remove('access_token');
                     deferred.reject({
-                        'errors': ['Token not found']
+                        'data': {
+                            'errors': ['Token not found']
+                        }
                     });
                 }
             }).catch(function(response) {
@@ -51,15 +52,15 @@ function Auth($http, API_URL, localStorageService, jwtHelper, PermRoleStore, Use
 
     self.getUserId = function() {
         var token = self.getToken(),
-            decodedToken = (token) ? jwtHelper.decodeToken(token): {};
+            decodedToken = (token) ? jwtHelper.decodeToken(token) : {};
         return decodedToken['identity'];
     };
 
-    self.isTokenValid = function() {
-        var token = this.getToken();
-        return token !== null && !jwtHelper.isTokenExpired(token);
+    self.isTokenValid = function(token) {
+        var value = token || this.getToken();
+        return value !== null && !jwtHelper.isTokenExpired(value);
     };
 }
-Auth.$inject = ['$http', 'API_URL', 'localStorageService', 'jwtHelper', 'PermRoleStore', 'User', '$q'];
+Auth.$inject = ['$http', 'API_URL', 'localStorageService', 'jwtHelper', 'User', '$q'];
 
 module.exports = Auth
