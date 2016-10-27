@@ -48,7 +48,7 @@
                             <div class="btn-group">
                                 <button class="btn btn-primary btn-xs" name="edit" ng-if="!bookmark.editing" ng-click="ctrl.edit(bookmark)"><span class="glyphicon glyphicon-pencil"></span></button>
                                 <button class="btn btn-success btn-xs" name="save" ng-if="bookmark.editing" ng-click="ctrl.save(bookmark)"><span class="glyphicon glyphicon-ok"></span></button>
-                                <button class="btn btn-danger btn-xs" name="delete" mwl-confirm title="{{'Delete bookmark ' + bookmark.id}}" confirm-text="YES" confirm-button-type="danger btn-xs" cancel-text="NO" cancel-button-type="warning btn-xs" message="Are you sure?" on-confirm="ctrl.delete(bookmark)" >
+                                <button class="btn btn-danger btn-xs" name="delete" mwl-confirm title="{{'Delete bookmark ' + bookmark.id}}" confirm-text="YES" confirm-button-type="danger" cancel-text="NO" cancel-button-type="warning" message="Are you sure?" placement="left" on-confirm="ctrl.delete(bookmark)" >
                       <span class="glyphicon glyphicon-minus"></span>
                     </button>
                             </div>

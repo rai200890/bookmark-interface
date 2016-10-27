@@ -26,7 +26,7 @@
                         <td>
                             <div class="btn-group">
                                 <a class="btn btn-primary btn-xs" name="edit" ui-sref="protected.user_edit({id: user.id})"><span class="glyphicon glyphicon-pencil"></span></a>
-                                <a class="btn btn-danger btn-xs" mwl-confirm placement="left" title="{{'Delete user ' + user.id}}" confirm-text="YES" confirm-button-type="btn btn-danger btn-xs" cancel-text="NO" confirm-button-type="btn btn-warn btn-xs" message="Are you sure?" on-confirm="ctrl.delete($index)">
+                                <a class="btn btn-danger btn-xs" mwl-confirm title="{{'Delete user ' + user.id}}" confirm-text="YES" confirm-button-type="danger" cancel-text="NO" cancel-button-type="warning" placement="left" message="Are you sure?" on-confirm="ctrl.delete($index)">
                                     <span class="glyphicon glyphicon-minus"></span></a>
                             </div>
                         </td>
